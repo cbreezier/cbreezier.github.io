@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: A blog
 subtitle: ''
 description: ''
 keywords:
-author: Unknown
+author: Leo Huang
 language: en
-timezone: ''
+timezone: 'Australia/Sydney'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -17,8 +17,8 @@ url: https://leohuang.dev
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: false # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -98,6 +98,23 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: cactus
+
+theme_config:
+  colorscheme: dark
+  nav:
+    Home: /
+    About: /about/
+    Blog: /archives/
+  social_links:
+    github: https://github.com/cbreezier
+    linkedin: https://www.linkedin.com/in/leo-huang-7612b417a/
+    mail: mailto:leo.tx.huang@gmail.com
+  utterances:
+    enabled: true
+    repo: cbreezier/cbreezier.github.io
+    issue_term: pathname
+    label: utterances
+    theme: photon-dark
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
