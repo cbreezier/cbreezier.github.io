@@ -6,15 +6,16 @@ tags:
 ---
 
 ## Friday 20th January
+### Noon
 Alice and Alex arrive back from NZ! Alex fell asleep in the car back from the airport, and woke up when we tried to move him from the car to his bed. He was probably too excited at seeing home and his old room. He slept for a total of about 40 mins from about 10:20am to 11:00am.
 
-
+### Evening
 I don’t remember when he slept at night but it was probably quite early, around 6pm, due to being jetlagged on NZ time and not sleeping very long for his noon nap. I put him to sleep using the standard techniques: story, and massage on the feet, hands, and face.
 
-
+### Night
 Alex woke at 9:30pm and then again at 12am and again at 2am. Thankfully, in all 3 cases he was fairly easy to settle. I used the standard foot and hand massages with the graduated extinction method, waiting until he was calm and then leaving the room for 2, 4, 6 minutes. He cried quite a lot, but each settling session took under 30 minutes.
 
-
+### Morning
 He woke up some time after 4am, at which point Alice went to cuddle him, and he finally got up at about 5:10am.
 
 
@@ -96,3 +97,5 @@ He woke up at 6am crying. Hopefully that wasn't because of being left to cry him
 
 ## Wednesday 25th January
 Alex started his bedtime routine at about 11:50am today. This time it was very difficult. He refused to lie down on his bed for more than 10 seconds at a time, and also didn't stay in bed when I left the room. I think he might have been a bit overtired, but it's hard to say. I told him that I would only stay in the room with him while he was lying in bed, and had to leave the room twice to let him know I was serious. I'm not sure if threats like that are the right thing to do - it's kind of the opposite of the "excuse me" method. He finally fell asleep after a bit of crying, with me in the room. The whole process took an hour. Feels like a bit of a regression. Maybe the diminished sleep fading is making everything harder.
+
+We started Alex's bath at around 7:40pm and he was in bed just before 8pm. He fell asleep shortly after I told him his bedtime story, without me having to leave the room a single time. He stayed on the bed, didn't sit up, and just rolled over onto his side. The whole process took just over 10 minutes. What a blissful feeling.
