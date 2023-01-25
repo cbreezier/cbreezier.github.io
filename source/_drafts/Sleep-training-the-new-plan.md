@@ -89,3 +89,10 @@ Alex woke up at 6am, quietly getting up and declaring "the bub is awake!" and ma
 We got Alex into bed just past 11:30am. He wasn't quite as cheeky as yesterday, but he was definitely still quite excitable. He continued to declare his intention to sit next to me, and subsequently do so, smiling up at me. I got up to 2, 4, 6, 6 minutes, and he actually fell asleep by himself while I was out of the room! The entire process took just about 40 minutes.
 
 We start Alex's bedtime routine at about 7pm again, and is in bed by 7:40pm. He's quite well behaved and stays on the bed the entire time. I get up to 2, 4 minutes and he actually falls asleep all by himself again, with me outside the room. He tends to chatter and fidget while I'm in the room, and actually seems to do a lot better when I'm out of the room. The process took only 20 minutes this time!
+
+Alex woke once during the night at 12am. He was a bit difficult to settle and kept crying when I left the room (how did he even know?!). He was able to fall asleep within 2 minutes without me going back into the room though.
+
+He woke up at 6am crying. Hopefully that wasn't because of being left to cry himself to sleep during the night...
+
+## Wednesday 25th January
+Alex started his bedtime routine at about 11:50am today. This time it was very difficult. He refused to lie down on his bed for more than 10 seconds at a time, and also didn't stay in bed when I left the room. I think he might have been a bit overtired, but it's hard to say. I told him that I would only stay in the room with him while he was lying in bed, and had to leave the room twice to let him know I was serious. I'm not sure if threats like that are the right thing to do - it's kind of the opposite of the "excuse me" method. He finally fell asleep after a bit of crying, with me in the room. The whole process took an hour. Feels like a bit of a regression. Maybe the diminished sleep fading is making everything harder.
