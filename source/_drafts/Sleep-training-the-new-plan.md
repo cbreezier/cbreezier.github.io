@@ -99,3 +99,12 @@ He woke up at 6am crying. Hopefully that wasn't because of being left to cry him
 Alex started his bedtime routine at about 11:50am today. This time it was very difficult. He refused to lie down on his bed for more than 10 seconds at a time, and also didn't stay in bed when I left the room. I think he might have been a bit overtired, but it's hard to say. I told him that I would only stay in the room with him while he was lying in bed, and had to leave the room twice to let him know I was serious. I'm not sure if threats like that are the right thing to do - it's kind of the opposite of the "excuse me" method. He finally fell asleep after a bit of crying, with me in the room. The whole process took an hour. Feels like a bit of a regression. Maybe the diminished sleep fading is making everything harder.
 
 We started Alex's bath at around 7:40pm and he was in bed just before 8pm. He fell asleep shortly after I told him his bedtime story, without me having to leave the room a single time. He stayed on the bed, didn't sit up, and just rolled over onto his side. The whole process took just over 10 minutes. What a blissful feeling.
+
+He woke up at 2am and 3:30am. At the 2am wake-up, he actually self-settled after under 2 minutes of crying. The 3:30am wak-up required my presence, but he was still quite easy to put down. He whinged a bit after I left the room but was able to settle himself quickly.
+
+He woke up at 6:40am, in a good mood.
+
+## Thursday 26th January
+We started his noon nap routine at about 12:00pm, but he was fairly difficult to settle. I tried to quickly shut down all his attempts at being cheeky. That was definitely the hardest part; I naturally wanted to laugh with him and cuddle him, and it was quite difficult to ruthlessly shut that down. I used the "I'm going to go wash dishes if you don't lie down" threat again. I'm still not sure it's the right thing to do. He eventually slept after about 40 minutes, basically crying himself to sleep.
+
+Alex was in bed and I finished by story at 7:45pm. He was very good and fell asleep in 10 minutes. He did ask me to put on his blanket (and proceed to kick it off) a couple of times. I'm worried about encouraging him to seek interaction this way, but it hasn't developed into a problem yet. He also cried out quite loudly for seemingly no reason before falling asleep. I must have left the room a bit too early, because he cried when I left and I had to re-enter after 2 minutes, whereupon he fell back into sleep quickly. Overall the whole thing took just under 20 minutes.
