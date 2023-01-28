@@ -108,3 +108,19 @@ He woke up at 6:40am, in a good mood.
 We started his noon nap routine at about 12:00pm, but he was fairly difficult to settle. I tried to quickly shut down all his attempts at being cheeky. That was definitely the hardest part; I naturally wanted to laugh with him and cuddle him, and it was quite difficult to ruthlessly shut that down. I used the "I'm going to go wash dishes if you don't lie down" threat again. I'm still not sure it's the right thing to do. He eventually slept after about 40 minutes, basically crying himself to sleep.
 
 Alex was in bed and I finished by story at 7:45pm. He was very good and fell asleep in 10 minutes. He did ask me to put on his blanket (and proceed to kick it off) a couple of times. I'm worried about encouraging him to seek interaction this way, but it hasn't developed into a problem yet. He also cried out quite loudly for seemingly no reason before falling asleep. I must have left the room a bit too early, because he cried when I left and I had to re-enter after 2 minutes, whereupon he fell back into sleep quickly. Overall the whole thing took just under 20 minutes.
+
+He almost slept through the entire night, waking only once at 5:20am. I was able to put him back to sleep thankfully.
+
+He finally woke in a good mood at 6:40am.
+
+## Friday 27th January
+Today was a disaster. We started his sleep routine at 11:50am and he just didn't seem sleepy at all. After an hour of the standard back and forth, I found that he had done a poop in his nappy. I brought Alice in to help me deal with that mess, and then let him go downstairs to play quietly for 15mins. Once he was put back in bed, he continued to resist sleeping. He no longer minded when I left the room; he would walk over and play with the blinds, or climb up and down his cot, or sit up and play with his soft toys. Another hour later, he still wasn't the faintest bit getting to sleep, and so I just gave up. No nap today. Disaster.
+
+We actually had the grandparents (my parents) over to look after him after dinner. This is a weekly routine that we'd like to stick to, so that we can get a little respite. Alice and I were supposed to be back by 7:30pm to put the bub to sleep, but we got back a little late. To our happy surprise, the grandparents were successful in putting him to sleep! They lay on the floor in his room, and Alex was able to fall asleep by himself. The sleep training really is working.
+
+Unfortunately, the grandparents made a critical mistake - they didn't put him in a nappy. Alex woke up with his clothes and bed soaked at 12am. I stripped him down and put everything in the wash, and was able to put him back to sleep without too much difficulty. It took a little longer than usual because the process of stripping and changing woke him up much more than usual.
+
+Alex woke up at 6:40am in a good mood again.
+
+## Saturday 28th January
+I was determined not to make the same mistake as yesterday. I think he just wasn't tired. Today, we decided to start his bedtime at 1pm - about an hour later than the past few days. We had also taken him out to Eastwood and he played in the sun in the playground. On top of that, I made sure to tell an extra long story. Whatever the reason, he was able to fall asleep shortly after my story concluded, within 10 minutes. He fell asleep at 1:20pm.
