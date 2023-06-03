@@ -5,6 +5,121 @@ tags:
 - parenting
 ---
 
+Alex is now about 22 months old, and he's been wonderful in almost all aspects except one: he has never slept through the night, and it often takes an exhausting _hour_ of singing, bouncing, and praying to get him to go to sleep.
+
+As a newborn, we had reasonable success putting him down to sleep in his bassinet or cot. But one day, we simply could not put him down any more. I distinctly remember those moments held with bated breath, attempting to lower him into the cot while keeping him steady and feeling like I was holding a literal bomb. Praying that _this time_, oh God please let him go down easily just this one more time. And then the inevitable crying, the agony, the frustration, and the eventual resignation.
+
+There would be naps where I would literally hold him for the entire hour or two, because I didn't have the physical or emotional energy of going through the failure of putting him down. Not after all my effort soothing him to sleep in the first place. There were times when Alice would literally hold him for _hours and hours_ throughout the night, because it was just easier.
+
+And so we naturally drifted into the pattern of co-sleeping (and by "we", I mean Alice. I had the luxury of sleeping alone to try and be able to work the next day). It was part survival mechanism, but also our inability to ignore his needs - surely we shouldn't throw him to the cold lonely world of isolation so early in his life?
+
+This continued all the way up until he was about 18 months old. We lay down some mattresses on the floor so that rolling off the bed wouldn't be so terrifyingly consequential. We were breastfeeding him exclusively, and co-sleeping definitely made that more convenient.
+
+Ultimately, the situation was unsustainable. Alice hadn't had a proper night's sleep for a year and a half. We also wanted to start weaning him off breastmilk (he was really only suckling for comfort at this point, not nutrition). Naturally, we decided to start getting him to sleep by himself. I would be in charge of putting him to sleep, as well as settling him throughout the night.
+
+# The difficult part
+Co-sleeping was incredibly difficult for Alice, and resulted in abysmal quality of sleep. But in a sense, it was still the path of least resistance. Putting Alex down involved lying next to him and letting him suckle to sleep, and the night-time wakings were disruptive but passive - roll over and let him suckle again.
+
+But now we had to find alternative ways to put him down. I started with what worked for him as an infant: bouncing and singing. When that ceased to be effective, I tried stories. Every single night was an exhausting ordeal which could take up to an hour, or sometimes even more. It began to become something I would really dread.
+
+It was the worst on hotter evenings; after an hour of holding, rocking, bouncing, singing, and being becoming drenched in sweat, he might still refuse to sleep. For a midday nap, that might mean he would just skip that nap. In the evening, it might mean calling in the cavalry and have him fall asleep on the breast again. Either way, it always felt like a complete and abject failure. It's hard to describe how soul-crushing those failures felt, how physically and emotionally drained I would feel, and the sense of relief every time he _did_ eventually go down.
+
+Somehow, it actually got worse. He started refusing to be held at all. Sometimes even the breast wouldn't work. He started tiring of new soothing methods (massages, music, new songs, new stories) more and more quickly. It felt like an arms race that I was destined to lose.
+
+I haven't even started on the _night-time wakings_ yet. He would wake up 2-4 times every night, and it could sometimes take 40 minutes to settle him (although usually closer to 20 minutes). Needless to say, this completely destroys any semblance of sleep quality that I might have otherwise had.
+
+So I began what I now know is called the "graduated extinction" method. I would settle him to the point where he stopped crying, then put him down and leave the room (upon which he would immediately start crying again). I would stay outside for 2 minutes, then repeat the process, this time staying outside for 4 minutes, then 6 minutes. After that if he was still crying, I would go in and take however long I needed to get him back to sleep.
+
+It actually did have some positive effects: he started waking less in the night - only a couple of times now - and he became easier and quicker to settle. Even so, it wasn't enough to preserve our sanity.
+
+This obviously wasn't working. Why did we let it go on for so long before seeking alternatives?
+
+Partly, it was still the path of least resistance. It was difficult, but it was the devil we knew. Trying something different would almost certainly involve a short period where things were even worse. We also had a lot of help from Alice's parents and could rotate the duty of putting the bub to sleep.
+
+Back to the present day - it's January 2023, the bub is 22 months old, we're back in Sydney after a vacation in New Zealand, and we no longer have Alice's parents around to help share the burden. By this time, he had gotten worse and it regularly took over an hour to initially put him down to sleep. It was time to finally, really knuckle down and try and sleep train him properly for real.
+
+It's time for a new plan.
+
+
+
+# The New Plan
+During a sleepless, frustrated night, I came across a new website and set of articles that I hadn't seen before.
+
+I was immediately drawn in by the problem definition:
+
+> Let me paint a picture for you. It’s been a long evening in the Smith household. Jimmy is 14 months old. Every night, since he was an infant, his parents have rocked him to sleep every night and then put him in his crib, at around 8 PM. His parents put him to sleep, sit down to watch some television and try to relax, but they are dreading the night ahead. Just when they get into bed, around 11 PM, they hear Jimmy crying out. They rush into his room frantically to try to rub his back so he falls asleep more quickly. These awakenings occur for the rest of the night every hour to an hour and a half. When he gets up for the day at 5:30 AM, Jimmy is quite irritable, and his parents are exhausted.
+> https://drcraigcanapari.com/behavioral-sleep-problems-in-children-part-1-inappropriate-sleep-associations/
+
+The core theory that was presented is that the child has built _inappropriate sleep associations_, where they need a parent nearby and/or specific soothing techniques to help them fall asleep. And this is the root cause for _both_ the difficulty in settling, as well as the night-time wakings.
+
+> Parents view the awakenings as the problem, but they are a symptom of the primary issue: the child has not learned to fall asleep by himself.
+> https://drcraigcanapari.com/behavioral-sleep-problems-in-children-part-1-inappropriate-sleep-associations/
+
+It made so much sense, and all I could do was kick myself for not having tried harder to find this information sooner. In my defense, there's not a lot of time for research when you're busy trying to stay afloat.
+
+First, I need to introduce a few terms and sleep training techniques. Dr Craig Canapari goes into great detail in [his post](https://drcraigcanapari.com/at-long-last-sleep-training-tools-for-the-exhausted-parent/) but I want to summarise them here again with my thoughts.
+
+### Cry it out (CIO, or extinction)
+This simply involves putting them down on the bed, leaving, and letting them cry their little lungs out for however long it takes. That might be a minute (yeah you wish), an hour, or even 4 hours.
+
+It's incredibly effective and trains them _quick_, but it's also incredibly traumatic for the parents, and bound to be stressful for the kid. It doesn't seem to necessarily traumatise the kid, but it does raise cortisol levels and it seems to be fading in popularity.
+
+I don't think I can handle this one.
+
+### Ferber method (graduated extinction)
+Same as above, but you only leave for a couple minutes before going back in, increasing the amount of time you leave them to cry each subsequent time.
+
+Also very effective and a bit less nuclear, but a lot more effort and time involved. Still a bit traumatising honestly. It's not easy standing outside a room listening to your own child sobbing out "daddy". A minute starts to feel really long.
+
+### Camping out
+This involves slowly transitioning from more involved soothing methods (eg, massage) towards independent sleep. The steps could be: massaging for 3 days, then sitting by their bed for 3 days, then sitting by the door for 3 days, then setting outside for 3 days, etc.
+
+This is quite gentle, but it can take a long time. My question is: how do you transition from one step to another? I knew that if I changed from massage to sitting by his bed, I would be sitting there for at least an hour and a half, and I don't know if he would sleep by then.
+
+### Excuse me method
+This involves giving an excuse (eg, I'm going to wash dishes) before leaving. It doesn't have to be a good excuse! In fact, this trick [works on adults too](https://lifehacker.com/how-to-convince-people-to-let-you-cut-in-line-5824481).
+
+This method obviously requires the child to be old enough to understand what you're saying. From experience, I know that Alex is quite good at accepting excuses already, so I think this could be a useful idea.
+
+### Sleep fading
+This isn't really a technique by itself, so much as a catalyst. It involves shifting bedtime to be a little bit later (eg, 30 minutes later than usual) to ensure the child is more sleepy. It can help make the other techniques more successful. After fading, you do need to slowly bring their bedtime back to the original earlier time though.
+
+I like this idea a lot, because having greater success early on and building those positive associations sounds really useful. The last thing I want is for Alex to associate excuses with "I'm definitely not going to sleep now". It's also very fortuitous timing because we just got back from a vacation to New Zealand, so the jetlag acts as a natural fading agent and we don't have to worry about bringing his bedtime back again.
+
+
+## The actual plan
+My plan involved a combination of a few different sleep training techniques. The core technique remained the graduated extinction method, but there were two main things that I understood after my research:
+
+1. I couldn’t put him to sleep with massage or any techniques that would cause him to be reliant on my presence and involvement. He has to learn to fall asleep by himself.
+
+2. If anything, it was more important to focus on the initial sleep routine rather than the night-time wakings.
+
+
+I considered trying the graduated extinction by itself, but I was worried that it wouldn’t be very effective because I knew that Alex could and would stand up, walk off the mattress, open the door and go outside his room. I also knew that if I held the door closed from the outside, he would really cry and would just stand at the door until I opened it. I didn’t think this was a very direct path to him learning to sleep on his own; he would probably end up collapsing asleep by the door rather than on his bed, and be quite traumatised too.
+
+
+I also knew that I had to wean him off the massages, so I liked how well that fit in with the “camp it out” method. However, I was worried that each session of putting him to sleep would then take well over an hour, without the power of the massages. Alex likes to laugh and talk and run around the room and be silly, and I knew from experience that the best remedy to his cheeky attitude was to leave the room, which would cause him to cry. It's much easier to comfort him and let him slide into sleep rather than calm down his cheeky excitement (it sounds terrible to write this out but it’s true).
+
+
+However, just leaving the room without a word would put him into wailing siren mode immediately, so I decided to take a leaf out of the “excuse me” method. I knew that Alex was very reasonable – he readily accepts excuses and reasoning in other areas too, so I expected that this would work well.
+
+
+Finally, I mixed in the “sleep fading” technique, which was perfect because we were trying to fix his NZ jetlag anyway, which meant that we could fade without having to bring his bedtime back earlier again.
+
+
+The final plan:
+
+1. Start bed time 30 minutes later than the day before (sleep fading) to get him more tired and likely to sleep.
+2. Wean off massages with the “camp it out” method by sitting next to his bed, reciting a calming script (“daddy’s here, close your eyes and go to bed, I’ll see you in the morning, good boy”) for as long as it seems effective. I would also make regular shooshing noises, which I usually do while giving him massages. If he starts being excited and cheeky, time to lay him back down and move to step 2.
+
+3. Make an excuse as per the “excuse me” method (I always say I’m going to wash dishes) and promise to be back soon, then leave the room.
+
+4. Set a timer for 2, 4, 6 minutes as per the “graduated extinction” method, and re-enter the room once the time is up. Act surprised if he’s out of the bed or crying, remind him that I just went to wash dishes, and repeat from step 1.
+
+
+# Sleep logs
+I maintained some detailed logs during the training period. The first two logs are from the days before we started proper sleep training.
+
 ## Friday 20th January
 ### Noon
 Alice and Alex arrive back from NZ! Alex fell asleep in the car back from the airport, and woke up when we tried to move him from the car to his bed. He was probably too excited at seeing home and his old room. He slept for a total of about 40 mins from about 10:20am to 11:00am.
@@ -24,55 +139,17 @@ For his noon nap, we put Alex down just past 10am. He went down with the standar
 
 I put Alex down at about 6:30pm using the standard techniques. Another 30min ordeal – not too bad.
 
-
 Alex first woke at 11:30pm. It was difficult to put him back to sleep. I used the graduated extinction method, but he cried and wailed throughout the whole ordeal and I just could not leave him asleep. Even when I was able to leave him asleep, he woke up again after about 10 minutes by himself. I continued to try the same strategy (starting from 2 minutes again) and the entire ordeal took about an hour and a half. I lay awake for at least another hour, frustrated and exhausted, falling asleep some time past 2am.
 
-
 He woke up at about 6am.
-
-
-# The New Plan
-This pattern wasn’t sustainable. It was time to finally, really knuckle down and try and sleep train him properly for real. Part of the motivation came from knowing that it was just me and Alice now – we didn’t have Alice’s parents to fall back on to help share the burden of looking after the kid. Another motivation was the absolutely terrible sleeping habits that Alex had picked up while in NZ – it took us over an hour to put him to bed each time, and he woke frequently too.
-
-
-The plan involved a combination of a few different sleep training techniques. The core technique remained the graduated extinction method, but there were two main things that I understood after my research:
-
-
-1. I couldn’t put him to sleep with massage or any techniques that would cause him to be reliant on my presence and involvement. He has to learn to fall asleep by himself.
-
-2. If anything, it was more important to focus on the initial sleep routine rather than the night-time wakings.
-
-
-I considered trying the graduated extinction by itself, but I was worried that it wouldn’t be very effective because I knew that Alex could and would stand up, walk off the mattress, open the door and go outside his room. I also knew that if I held the door closed from the outside, he would really cry and would just stand at the door until I opened it. I didn’t think this was a very direct path to him learning to sleep on his own; he would probably end up collapsing asleep by the door rather than on his bed, and be quite traumatised too.
-
-
-I also knew that I had to wean him off the massages, so I liked how well that fit in with the “camp it out” method. However, I was worried that each session of putting him to sleep would then take well over an hour, without the power of the massages. Alex likes to laugh and talk and run around the room and be silly, and I knew from experience that the best remedy to his cheeky attitude was to leave the room, which would cause him to cry. It was much easier to comfort him and let him slide into sleep rather than calm down his cheeky excitement (it sounds terrible to write this out but it’s the unavoidable truth).
-
-
-However, just leaving the room without a word would put him into wailing siren mode immediately, so I decided to take a leaf out of the “excuse me” method. I knew that Alex was very reasonable – he readily accepts excuses and reasoning in other areas too, so I expected that this would work well.
-
-
-Finally, I mixed in the “sleep fading” technique, which was perfect because we were trying to fix his NZ jetlag anyway, which meant that we could fade without having to bring his bedtime back earlier again.
-
-
-The final plan:
-
-1. Wean off massages with the “camp it out” method by sitting next to his bed, reciting a calming script (“daddy’s here, close your eyes and go to bed, I’ll see you in the morning, good boy”) for as long as it seems effective. I would also make regular shooshing noises, which I usually do while giving him massages. If he starts being excited and cheeky, time to lay him back down and move to step 2.
-
-2. Make an excuse as per the “excuse me” method (I always say I’m going to wash dishes) and promise to be back soon, then leave the room.
-
-3. Set a timer for 2, 4, 6 minutes as per the “graduated extinction” method, and re-enter the room once the time is up. Act surprised if he’s out of the bed or crying, remind him that I just went to wash dishes, and repeat from step 1.
 
 
 ## Sunday 22nd January
 This was the first day we enacted the New Plan. We put him down for his noon nap at about 10:30 (half hour fade compared to yesterday). I put him down, told him a story, and then started The Plan. No massages. He did get up and run around the room a little bit, but I managed to follow The Plan. To my utter surprise, he actually managed to fall asleep without me touching him a single time. We did get up to the 6 minute graduated extinction timer and the whole process took about 40 minutes.
 
-
 At night time, we started his sleep time routine at 6:30pm with his bath, and he was in bed just before 7pm. I follow The Plan religiously, and I’m again successful after about 45 minutes. He does get up and try and open the door, and frequently asks for mum, but I know how to deal with that. Sneakily block the door at the bottom with my hand, and tell him mum is taking a shower. The trick is, mum is always taking a shower.
 
-
 Throughout the night, Alex does not wake up a single time. That’s right, he literally slept all the way through from about 7:50pm til 5am. It's hard to overstate how ecstatic I was at this development - this was literally the first time in his entire life that he's slept through the entire night by himself.
-
 
 He did wake up quite early at 5am, but I was so happy I didn’t even care. Perhaps it’s my imagination, but Alex seemed particularly chipper, adorable, and well behaved that day. Maybe everything is better when everyone gets good sleep.
 
@@ -124,3 +201,18 @@ Alex woke up at 6:40am in a good mood again.
 
 ## Saturday 28th January
 I was determined not to make the same mistake as yesterday. I think he just wasn't tired. Today, we decided to start his bedtime at 1pm - about an hour later than the past few days. We had also taken him out to Eastwood and he played in the sun in the playground. On top of that, I made sure to tell an extra long story. Whatever the reason, he was able to fall asleep shortly after my story concluded, within 10 minutes. He fell asleep at 1:20pm.
+
+# Epilogue
+It's now the 25th of February, over a month since we started The New Plan of sleep training.
+
+He's been really good at sleeping at night, reliably within 10 minutes of entering the room and without much fuss. Even better, anyone can do it! Grandma and grandpa from both sides can put him down without problem. He is truly able to fall asleep independently.
+
+At his noon naps, it isn't quite as wonderful. Recently he's been napping one out of two days - every second day he just doesn't sleep. Perhaps his night time sleep quality is better, so the noon nap isn't needed sometimes? His mood is usually pretty stable on the days that he doesn't nap. A little bit quicker to tantrum but not obviously extraordinarily overtired.
+
+Throughout the night, he sleeps really well. He often sleeps through all the way to 5am, and then again to 8am after a quick settle. Usually that's because he's rolled onto the floor. It might also that he gets a bit cold, because he sometimes asks for his blanket.
+
+Other notes:
+ - in the mornings, he'll say "daddy has come into the room, daddy has finished washing the dishes", which is hilarious
+ - he always wakes up in a good mood now, and often even leaves the room by himself, muttering "bub has woken up, bub is going down the stairs" which caused me to wake up in a panic the first couple of times
+
+Looking back, the previous sleeping struggles feel like a rapidly fading nightmare. My desperate prayers from back then seem to have been answered, and more. I really wish we started along this path earlier - I think somewhere between the 8-14 month mark would be a good time to transition to this kind of independent sleep.
