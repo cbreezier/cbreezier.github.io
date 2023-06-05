@@ -255,7 +255,7 @@ I tried a variety of shell commands and it was _so liberating_ to get all the ou
 the blind sqli from before, I felt like a starving man who stumbled into a feast. I basically had a full shell on the
 server (and even briefly considered writing a script to emulate a CLI) and could probably do all sorts of nasty things.
 
-I had fun exploring the filesystem and looking at all the files, but eventually find the inspiration to look at the
+I had fun exploring the filesystem and looking at all the files, but eventually remembered to look at the
 environment variables with the `env` command.
 
 Lo and behold, there I found all 3 flags.
