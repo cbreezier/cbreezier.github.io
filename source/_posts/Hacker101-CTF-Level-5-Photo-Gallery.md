@@ -3,9 +3,12 @@ title: 'Hacker101 CTF Level 5: Photo Gallery'
 tags:
   - programming
   - hacking
+  - ctf
+  - hacker101
 date: 2023-06-05 23:59:16
 ---
 
+_Note: This post contains spoilers and a detailed walkthrough of the level!_
 
 ## First look
 ![Screenshot of the level](screenshot.png)
