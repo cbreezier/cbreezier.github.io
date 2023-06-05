@@ -94,6 +94,31 @@ include:
 exclude:
 ignore:
 
+# Rendering
+marked:
+  gfm: false
+  pedantic: false
+  breaks: false
+  smartLists: true
+  smartypants: true
+  quotes: '“”‘’'
+  modifyAnchors: 0
+  anchorAlias: false
+  autolink: true
+  mangle: true
+  sanitizeUrl: false
+  dompurify: false
+  headerIds: true
+  lazyload: false
+  prependRoot: true
+  postAsset: true
+  external_link:
+    enable: false
+    exclude: [ ]
+    nofollow: false
+  disableNunjucks: false
+  descriptionLists: true
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
