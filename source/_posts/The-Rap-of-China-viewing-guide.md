@@ -73,7 +73,8 @@ enjoyable piece this whole season (in my opinion). This man came with a plan
 to use the surprise factor to just _assassinate_ a strong opponent.
 
 I just love 于意Yee's expression during 刘炫廷's piece. He just looks more and more
-uncomfortable and confused.
+uncomfortable and confused. You might want to rewind a bit and watch from 
+于意Yee's set to appreciate the full context.
 
 ### [DOOOBOI](https://youtu.be/vXKZGvpe5xU?list=PLXZX5ci-NIy8GZsVly7W-61SY0YaRdUzw&t=2737)
 I'm not impressed by DOOBOI. In fact, I just do not understand how he just 
@@ -101,6 +102,9 @@ He talks about how he thought he was the only one, but there's actually a
 lot of them. But he claims that he'll be the one to "carry the flag" for his 
 generation. Big words. Capper disagrees (another 00后).
 
+He has a background in music and has one of the best singing voices in this 
+season.
+
 Orenda beats out NINEONE (a pretty well-known female rapper). NINEONE's 
 piece just before this isn't bad either.
 
@@ -113,13 +117,14 @@ also happens to be a 00后.
 
 You gotta watch both, because both sets are just 🔥.
 
-The judges are all very impressed with all of the new blood, and I have to 
-agree.
+The judges are all very impressed with all the new blood, and I have to 
+agree. They comment that the decision between Capper and VOB was the hardest 
+one of all the 60 second performances.
 
 ### [VOB](https://youtu.be/VQItFDeF0PQ?list=PLXZX5ci-NIy8GZsVly7W-61SY0YaRdUzw&t=2870)
 VOB is beaten out by Capper, but damn his set was explosive. Such a shame.
 
-## Alliance rap battle 5v5
+## [Alliance rap battle 5v5](https://youtu.be/tUMzmWl8a7o?list=PLXZX5ci-NIy8GZsVly7W-61SY0YaRdUzw&t=2389)
 5 beats, 5 rappers per team. Winner by popular vote from 100 viewers.
 
 Each team gets only 30 minutes to prepare, so it's almost like freestyling 
