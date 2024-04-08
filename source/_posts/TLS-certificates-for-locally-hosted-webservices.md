@@ -5,7 +5,6 @@ tags:
 date: 2024-04-08 21:44:29
 ---
 
-
 It's 2024, and there's generally no excuse for any website to be served over 
 HTTP instead of HTTPS. While SSL/TLS certificates used to be expensive and 
 difficult to manage, ever since Let's Encrypt launched in 2016 it's become 
@@ -14,7 +13,7 @@ websites for the exceedingly low price of Free.
 
 But what about locally hosted websites? That is, websites that are hosted on 
 your local machine, or another machine on your LAN (Local Area Network). 
-These websites might be accessed via something like http://192.168.1.123:8093
+These websites might be accessed via something like [http://192.168.1.123:8093](http://192.168.1.123:8093)
 
 There's nothing terribly wrong about this; if you're following tutorials to 
 set up your home lab, you'll likely have a whole bunch of services that look 
@@ -43,6 +42,26 @@ there's really nothing stopping you from using something like [Cloudflare DNS](h
 to let the whole world know that some domain should resolve to a local IP.
 
 It doesn't make your local LAN any more accessible to the outside internet.
+
+### HSTS preload list
+
+By the way, there's _another_ reason why you might _need_ a TLS certificate. 
+Originally, I was happy to just set up DNS and access my sites via HTTP.
+
+But there's this thing called the [HSTS preload list](https://hstspreload.org/)
+which is hard-coded into modern browsers. Any domain that appears on this 
+list is forced to upgrade to HTTPS, even if it was originally accessed via 
+HTTP and the webserver didn't request an upgrade.
+
+The surprising part is that Google [added all of the TLDs that it owns
+to the HSTS preload list](https://endtimes.dev/dev-and-hsts-preload/#other-domains). 
+This means that if you have a `.dev` or a `.you` domain or any of the other 
+50+ TLDs that Google owns, you literally _must_ have a valid TLS certificate 
+for your websites.
+
+![All .dev domains are preloaded](hsts_preload_active.png)
+<div style="text-align: center"><em>Thanks Google. I mean, it's a 
+good thing, but still...</em></div>
 
 ## Standard Let's Encrypt setup
 
@@ -202,5 +221,5 @@ and the [example](https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/m
 The scripts actually automatically add those `ssl_*` directives. It's pretty 
 neat.
 
-After this simple config, you can now access https://subdomain.mydomain.com 
+After this simple config, you can now access [https://subdomain.mydomain.com](https://subdomain.mydomain.com) 
 and everything works perfectly.
