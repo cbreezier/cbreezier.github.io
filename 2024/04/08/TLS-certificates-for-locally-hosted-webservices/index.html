@@ -14,8 +14,9 @@
 <meta property="og:description" content="It’s 2024, and there’s generally no excuse for any website to be served over  HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and  difficult to manage, ever since Let’s Enc">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://leohuang.dev/2024/04/08/TLS-certificates-for-locally-hosted-webservices/your_connection_is_not_private.png">
+<meta property="og:image" content="https://leohuang.dev/2024/04/08/TLS-certificates-for-locally-hosted-webservices/hsts_preload_active.png">
 <meta property="article:published_time" content="2024-04-08T11:44:29.000Z">
-<meta property="article:modified_time" content="2024-04-08T11:44:29.260Z">
+<meta property="article:modified_time" content="2024-04-08T11:55:28.779Z">
 <meta property="article:author" content="Leo Huang">
 <meta property="article:tag" content="networking">
 <meta name="twitter:card" content="summary">
@@ -104,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Let%E2%80%99s-Encrypt-setup"><span class="toc-number">2.</span> <span class="toc-text">Standard Let’s Encrypt setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-sub-optimal-workarounds"><span class="toc-number">3.</span> <span class="toc-text">Some sub-optimal workarounds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporarily-make-your-local-webserver-public-accessible"><span class="toc-number">3.1.</span> <span class="toc-text">Temporarily make your local webserver public accessible</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Be-your-own-Certificate-Authority"><span class="toc-number">3.2.</span> <span class="toc-text">Be your own Certificate Authority</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusing-advice-out-there"><span class="toc-number">4.</span> <span class="toc-text">Confusing advice out there</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-01-challenge"><span class="toc-number">5.</span> <span class="toc-text">DNS-01 challenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Putting-it-all-together"><span class="toc-number">6.</span> <span class="toc-text">Putting it all together</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HSTS-preload-list"><span class="toc-number">1.1.</span> <span class="toc-text">HSTS preload list</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Let%E2%80%99s-Encrypt-setup"><span class="toc-number">2.</span> <span class="toc-text">Standard Let’s Encrypt setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-sub-optimal-workarounds"><span class="toc-number">3.</span> <span class="toc-text">Some sub-optimal workarounds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporarily-make-your-local-webserver-public-accessible"><span class="toc-number">3.1.</span> <span class="toc-text">Temporarily make your local webserver public accessible</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Be-your-own-Certificate-Authority"><span class="toc-number">3.2.</span> <span class="toc-text">Be your own Certificate Authority</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusing-advice-out-there"><span class="toc-number">4.</span> <span class="toc-text">Confusing advice out there</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-01-challenge"><span class="toc-number">5.</span> <span class="toc-text">DNS-01 challenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Putting-it-all-together"><span class="toc-number">6.</span> <span class="toc-text">Putting it all together</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -155,7 +156,7 @@ almost unnervingly simple to generate valid certificates for your own
 websites for the exceedingly low price of Free.</p>
 <p>But what about locally hosted websites? That is, websites that are hosted on 
 your local machine, or another machine on your LAN (Local Area Network). 
-These websites might be accessed via something like http:&#x2F;&#x2F;192.168.1.123:8093</p>
+These websites might be accessed via something like <a target="_blank" rel="noopener" href="http://192.168.1.123:8093/">http:&#x2F;&#x2F;192.168.1.123:8093</a></p>
 <p>There’s nothing terribly wrong about this; if you’re following tutorials to 
 set up your home lab, you’ll likely have a whole bunch of services that look 
 like this. But there are also several reasons why you might <em>not</em> want to 
@@ -179,6 +180,21 @@ While it may be better to run your own <a target="_blank" rel="noopener" href="h
 there’s really nothing stopping you from using something like <a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">Cloudflare DNS</a>
 to let the whole world know that some domain should resolve to a local IP.</p>
 <p>It doesn’t make your local LAN any more accessible to the outside internet.</p>
+<h3 id="HSTS-preload-list"><a href="#HSTS-preload-list" class="headerlink" title="HSTS preload list"></a>HSTS preload list</h3><p>By the way, there’s <em>another</em> reason why you might <em>need</em> a TLS certificate. 
+Originally, I was happy to just set up DNS and access my sites via HTTP.</p>
+<p>But there’s this thing called the <a target="_blank" rel="noopener" href="https://hstspreload.org/">HSTS preload list</a>
+which is hard-coded into modern browsers. Any domain that appears on this 
+list is forced to upgrade to HTTPS, even if it was originally accessed via 
+HTTP and the webserver didn’t request an upgrade.</p>
+<p>The surprising part is that Google <a target="_blank" rel="noopener" href="https://endtimes.dev/dev-and-hsts-preload/#other-domains">added all of the TLDs that it owns
+to the HSTS preload list</a>. 
+This means that if you have a <code>.dev</code> or a <code>.you</code> domain or any of the other 
+50+ TLDs that Google owns, you literally <em>must</em> have a valid TLS certificate 
+for your websites.</p>
+<p><img src="/2024/04/08/TLS-certificates-for-locally-hosted-webservices/hsts_preload_active.png" alt="All .dev domains are preloaded"></p>
+<div style="text-align: center"><em>Thanks Google. I mean, it's a 
+good thing, but still...</em></div>
+
 <h2 id="Standard-Let’s-Encrypt-setup"><a href="#Standard-Let’s-Encrypt-setup" class="headerlink" title="Standard Let’s Encrypt setup"></a>Standard Let’s Encrypt setup</h2><p>The problem is that the most stock-standard method of deploying Let’s Encrypt 
 certificates requires that your website is accessible to the public internet,
 so that Let’s Encrypt’s servers can access a file on your webserver and prove
@@ -261,7 +277,7 @@ and the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredss
 and the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/master/examples/example_server_overrides.conf">example</a>.</p>
 <p>The scripts actually automatically add those <code>ssl_*</code> directives. It’s pretty 
 neat.</p>
-<p>After this simple config, you can now access https:&#x2F;&#x2F;subdomain.mydomain.com 
+<p>After this simple config, you can now access <a target="_blank" rel="noopener" href="https://subdomain.mydomain.com/">https:&#x2F;&#x2F;subdomain.mydomain.com</a> 
 and everything works perfectly.</p>
 
   </div>
@@ -292,7 +308,7 @@ and everything works perfectly.</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Let%E2%80%99s-Encrypt-setup"><span class="toc-number">2.</span> <span class="toc-text">Standard Let’s Encrypt setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-sub-optimal-workarounds"><span class="toc-number">3.</span> <span class="toc-text">Some sub-optimal workarounds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporarily-make-your-local-webserver-public-accessible"><span class="toc-number">3.1.</span> <span class="toc-text">Temporarily make your local webserver public accessible</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Be-your-own-Certificate-Authority"><span class="toc-number">3.2.</span> <span class="toc-text">Be your own Certificate Authority</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusing-advice-out-there"><span class="toc-number">4.</span> <span class="toc-text">Confusing advice out there</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-01-challenge"><span class="toc-number">5.</span> <span class="toc-text">DNS-01 challenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Putting-it-all-together"><span class="toc-number">6.</span> <span class="toc-text">Putting it all together</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HSTS-preload-list"><span class="toc-number">1.1.</span> <span class="toc-text">HSTS preload list</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Let%E2%80%99s-Encrypt-setup"><span class="toc-number">2.</span> <span class="toc-text">Standard Let’s Encrypt setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-sub-optimal-workarounds"><span class="toc-number">3.</span> <span class="toc-text">Some sub-optimal workarounds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporarily-make-your-local-webserver-public-accessible"><span class="toc-number">3.1.</span> <span class="toc-text">Temporarily make your local webserver public accessible</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Be-your-own-Certificate-Authority"><span class="toc-number">3.2.</span> <span class="toc-text">Be your own Certificate Authority</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusing-advice-out-there"><span class="toc-number">4.</span> <span class="toc-text">Confusing advice out there</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-01-challenge"><span class="toc-number">5.</span> <span class="toc-text">DNS-01 challenge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Putting-it-all-together"><span class="toc-number">6.</span> <span class="toc-text">Putting it all together</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
