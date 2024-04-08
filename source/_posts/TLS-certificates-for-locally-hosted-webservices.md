@@ -155,7 +155,7 @@ I'm running nginx in a [Docker](https://www.docker.com/) container because
 it makes everything _so easy_. I even found an off-the-shelf container that 
 already has nginx and certbot set up. Here's the `docker compose` file:
 
-```dockercompose
+```docker
 services:
   nginx:
     # https://github.com/JonasAlfredsson/docker-nginx-certbot
