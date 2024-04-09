@@ -117,6 +117,11 @@ It's common for the external port to be the same as the internal one (eg,
 external port `25565` to internal `192.168.1.10:25565`), but there is 
 absolutely no requirement for that to be the case.
 
+### What happened to Fifth Street?
+
+IPV5 was an experimental protocol that never took off. [Lifewire](https://www.lifewire.com/what-happened-to-ipv5-3971327)
+provides a good overview of what happened to it.
+
 ### Double NAT
 
 Just a note - the most common problem you'll run into if you can't get port 
