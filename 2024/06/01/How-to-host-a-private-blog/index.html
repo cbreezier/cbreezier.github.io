@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="I wanted to write a private blog, primarily chronicling my journey and  thoughts as a parent, as well as serving as a diary for the growth and  development of my kids. This would be a blog that was ve">
+    <meta name="description" content="I wanted to write a private blog, primarily chronicling my journey and thoughts as a parent, as well as serving as a diary for the growth and development of my kids. This would be a blog that was very">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to host a private blog">
 <meta property="og:url" content="https://leohuang.dev/2024/06/01/How-to-host-a-private-blog/">
 <meta property="og:site_name" content="A blog">
-<meta property="og:description" content="I wanted to write a private blog, primarily chronicling my journey and  thoughts as a parent, as well as serving as a diary for the growth and  development of my kids. This would be a blog that was ve">
+<meta property="og:description" content="I wanted to write a private blog, primarily chronicling my journey and thoughts as a parent, as well as serving as a diary for the growth and development of my kids. This would be a blog that was very">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-01T11:06:22.000Z">
-<meta property="article:modified_time" content="2024-06-01T11:06:22.275Z">
+<meta property="article:modified_time" content="2025-03-25T10:04:29.737Z">
 <meta property="article:author" content="Leo Huang">
 <meta name="twitter:card" content="summary">
     
@@ -72,6 +72,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/2024/04/09/ELI5-Port-forwarding/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -101,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-not-make-it-public"><span class="toc-number">1.</span> <span class="toc-text">Why not make it public?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-uncensored-blog"><span class="toc-number">1.1.</span> <span class="toc-text">An uncensored blog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dangers-of-the-internet"><span class="toc-number">2.</span> <span class="toc-text">The dangers of the internet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Options-that-I-discarded"><span class="toc-number">3.</span> <span class="toc-text">Options that I discarded</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-whitelisting"><span class="toc-number">4.</span> <span class="toc-text">IP whitelisting</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-not-make-it-public"><span class="toc-number">1.</span> <span class="toc-text">Why not make it public?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-uncensored-blog"><span class="toc-number">1.1.</span> <span class="toc-text">An uncensored blog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dangers-of-the-internet"><span class="toc-number">2.</span> <span class="toc-text">The dangers of the internet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Options-that-I-discarded"><span class="toc-number">3.</span> <span class="toc-text">Options that I discarded</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-based-shared-secret-at-the-load-balancer"><span class="toc-number">4.</span> <span class="toc-text">Cookie-based shared secret at the load balancer</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -140,75 +142,90 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>I wanted to write a private blog, primarily chronicling my journey and 
-thoughts as a parent, as well as serving as a diary for the growth and 
+    <p>I wanted to write a private blog, primarily chronicling my journey and<br>
+thoughts as a parent, as well as serving as a diary for the growth and<br>
 development of my kids.</p>
-<p>This would be a blog that was very personal to me, where my intended 
-viewership is mostly myself (or rather, my future self). But I also wanted to be
+<p>This would be a blog that was very personal to me, where my intended<br>
+viewership is mostly myself (or rather, my future self). But I also wanted to be<br>
 able to share it with close friends and family.</p>
-<h2 id="Why-not-make-it-public"><a href="#Why-not-make-it-public" class="headerlink" title="Why not make it public?"></a>Why not make it public?</h2><p>A normal, publicly accessible website would serve my needs just fine. But I 
+<h2 id="Why-not-make-it-public">Why not make it public?</h2>
+<p>A normal, publicly accessible website would serve my needs just fine. But I<br>
 had two competing requirements that were completely at odds with each other:</p>
 <ol>
-<li>I wanted to use the real names of my kids and my partner, as well as 
+<li>I wanted to use the real names of my kids and my partner, as well as<br>
 upload photos and videos that were completely uncensored.</li>
 <li>I didn’t want all of this to be visible to the World Wide Dangerous Web.</li>
 </ol>
-<h3 id="An-uncensored-blog"><a href="#An-uncensored-blog" class="headerlink" title="An uncensored blog"></a>An uncensored blog</h3><p>Many people write about their kids and family by using aliases, fake names, 
+<h3 id="An-uncensored-blog">An uncensored blog</h3>
+<p>Many people write about their kids and family by using aliases, fake names,<br>
 and censored photos.</p>
-<p>If the intention is to write a blog that will be read 
-by hundreds or thousands of people that you don’t know, then that may be the 
-only option you have available to you. That’s a completely valid use case, 
-and I appreciate some of the blogs from other parents that I’ve been able to 
+<p>If the intention is to write a blog that will be read<br>
+by hundreds or thousands of people that you don’t know, then that may be the<br>
+only option you have available to you. That’s a completely valid use case,<br>
+and I appreciate some of the blogs from other parents that I’ve been able to<br>
 glean knowledge from.</p>
-<p>However, as a personal blog, the idea just didn’t sit right with me. It’s a 
-bit hard to describe, but I didn’t want to feel like I was doing something 
-shameful or dangerous. An analogy would be if I constantly used fake names 
-when talking to my partner about our children, for fear of the neighbours 
+<p>However, as a personal blog, the idea just didn’t sit right with me. It’s a<br>
+bit hard to describe, but I didn’t want to feel like I was doing something<br>
+shameful or dangerous. An analogy would be if I constantly used fake names<br>
+when talking to my partner about our children, for fear of the neighbours<br>
 hearing.</p>
 <p>It’s a kind of pressure that I didn’t want to deal with while writing.</p>
-<h2 id="The-dangers-of-the-internet"><a href="#The-dangers-of-the-internet" class="headerlink" title="The dangers of the internet"></a>The dangers of the internet</h2><p>Why do we need to protect the names and photos of our kids anyway?</p>
-<p>I’ve heard a lot of reasons, ranging from the generic “but privacy” to the 
-nauseating possibility of someone using AI deepfakes to create pornographic 
+<h2 id="The-dangers-of-the-internet">The dangers of the internet</h2>
+<p>Why do we need to protect the names and photos of our kids anyway?</p>
+<p>I’ve heard a lot of reasons, ranging from the generic “but privacy” to the<br>
+nauseating possibility of someone using AI deepfakes to create pornographic<br>
 material from photos.</p>
 <p>However, I found the following argument somewhat more convincing: consent.</p>
-<p>My kids are unable to consent to having their personal details published to 
+<p>My kids are unable to consent to having their personal details published to<br>
 the wide web. And once things are on the internet, you can never take it back.</p>
-<h2 id="Options-that-I-discarded"><a href="#Options-that-I-discarded" class="headerlink" title="Options that I discarded"></a>Options that I discarded</h2><p>I considered and discarded the following options:</p>
+<h2 id="Options-that-I-discarded">Options that I discarded</h2>
+<p>I considered and discarded the following options:</p>
 <ul>
-<li>a managed service like Blogger with privacy controls<ul>
+<li>a managed service like Blogger with privacy controls
+<ul>
 <li>I want to host and control the tech stack myself…just because</li>
 <li>still requires uploading my personal data to a 3rd party</li>
 <li>finnicky to make people create user accounts and log in</li>
 </ul>
 </li>
-<li>hosting something that allows logging in<ul>
+<li>hosting something that allows logging in
+<ul>
 <li>much more complex tech stack</li>
 <li>annoying to use</li>
 </ul>
 </li>
-<li>throwing basic auth on every page with a shared password<ul>
+<li>throwing basic auth on every page with a shared password
+<ul>
 <li>very annoying to use</li>
 <li>can’t revoke access to a single user</li>
 </ul>
 </li>
-</ul>
-<h2 id="IP-whitelisting"><a href="#IP-whitelisting" class="headerlink" title="IP whitelisting"></a>IP whitelisting</h2><p>I ended up on the idea of simply whitelisting IP addresses that could access 
-the personal blog. I would self-host the blog on my home server, and 
-configure the IP whitelist on my nginx reverse proxy. This has <em>numerous</em> 
-disadvantages:</p>
+<li>IP whitelisting
 <ul>
-<li>uptime of my home server is almost certainly worse than Blogger (but who 
-cares)</li>
-<li>updating the whitelist is a bit annoying (but really not that bad)</li>
-<li>people with dynamic IPV4 addresses (read: everyone) could change IPs</li>
-<li>people on CGNAT would mean that their entire cohort sharing the same 
-public IP could technically access my blog (but who cares - the scrapers 
-certainly can’t)</li>
-<li>I can’t just share the blog out with a single link - I have to actually 
-get their IP address</li>
+<li>transparently just works for people accessing the blog</li>
+<li>very annoying to set up</li>
+<li>between dynamic IPs, CGNAT, and cellular internet, it’s impossible to keep<br>
+the whitelist up to date. I had a friend whose IPV6 address kept changing!</li>
 </ul>
-<p>But ultimately, none of these were deal-breakers to me for my particular use 
-case.</p>
+</li>
+</ul>
+<p>I actually tried the IP whitelisting for a fair while, but it ended up just<br>
+being untenable.</p>
+<h2 id="Cookie-based-shared-secret-at-the-load-balancer">Cookie-based shared secret at the load balancer</h2>
+<p>The idea is very simple:</p>
+<ol>
+<li>share a link with a shared secret embedded in it</li>
+<li>upon visiting the link, write the shared secret to a cookie</li>
+<li>validate the cookie on each subsequent visit</li>
+</ol>
+<p>The best part is, all of this can be done at the load balancer/reverse proxy<br>
+(eg, nginx) so it’s completely agnostic to the tech stack of the website<br>
+you’re trying to protect.</p>
+<p>Here’s what it looks like in practice:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">server_name</span> your.domain;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># /auth/ endpoint is public access, and will set a cookie from a query param</span></span><br><span class="line">    <span class="section">location</span> /auth &#123;</span><br><span class="line">        <span class="attribute">add_header</span> Set-Cookie <span class="string">&quot;authToken=<span class="variable">$&#123;arg_token&#125;</span>;Path=/;Max-Age=31536000&quot;</span>;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">302</span> /;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">if</span> (<span class="variable">$cookie_authToken</span> != <span class="string">&#x27;your-long-shared-secret&#x27;</span>) &#123;</span><br><span class="line">            <span class="attribute">return</span> <span class="number">403</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># Refresh the cookie</span></span><br><span class="line">        <span class="attribute">add_header</span> Set-Cookie <span class="string">&quot;authToken=<span class="variable">$&#123;cookie_authToken&#125;</span>;Path=/;Max-Age=31536000&quot;</span>;</span><br><span class="line">        <span class="attribute">alias</span> /var/www/static/blog/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Then you simply share a link that looks like<br>
+<a target="_blank" rel="noopener" href="https://your.domain/auth?token=your-long-shared-secret">https://your.domain/auth?token=your-long-shared-secret</a><br>
+and everything Just Works™.</p>
 
   </div>
 </article>
@@ -238,7 +255,7 @@ case.</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-not-make-it-public"><span class="toc-number">1.</span> <span class="toc-text">Why not make it public?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-uncensored-blog"><span class="toc-number">1.1.</span> <span class="toc-text">An uncensored blog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dangers-of-the-internet"><span class="toc-number">2.</span> <span class="toc-text">The dangers of the internet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Options-that-I-discarded"><span class="toc-number">3.</span> <span class="toc-text">Options that I discarded</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-whitelisting"><span class="toc-number">4.</span> <span class="toc-text">IP whitelisting</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-not-make-it-public"><span class="toc-number">1.</span> <span class="toc-text">Why not make it public?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#An-uncensored-blog"><span class="toc-number">1.1.</span> <span class="toc-text">An uncensored blog</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-dangers-of-the-internet"><span class="toc-number">2.</span> <span class="toc-text">The dangers of the internet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Options-that-I-discarded"><span class="toc-number">3.</span> <span class="toc-text">Options that I discarded</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-based-shared-secret-at-the-load-balancer"><span class="toc-number">4.</span> <span class="toc-text">Cookie-based shared secret at the load balancer</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -274,7 +291,7 @@ case.</p>
     Copyright &copy;
     
     
-    2016-2024
+    2016-2025
     Leo Huang
   </div>
   <div class="footer-right">

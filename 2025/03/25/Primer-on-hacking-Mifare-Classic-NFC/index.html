@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="There is a lot of information out on the internet about Mifare Classic NFC cards and the various exploits that they are subject to. However, the information is often fragmented or assumes a lot of pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Primer on hacking Mifare Classic NFC">
+<meta property="og:url" content="https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/">
+<meta property="og:site_name" content="A blog">
+<meta property="og:description" content="There is a lot of information out on the internet about Mifare Classic NFC cards and the various exploits that they are subject to. However, the information is often fragmented or assumes a lot of pri">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/sectors.png">
+<meta property="article:published_time" content="2025-03-25T10:47:56.000Z">
+<meta property="article:modified_time" content="2025-03-25T11:27:42.134Z">
+<meta property="article:author" content="Leo Huang">
+<meta property="article:tag" content="programming">
+<meta property="article:tag" content="hacking">
+<meta property="article:tag" content="nfc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/sectors.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Primer on hacking Mifare Classic NFC</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/25/Chinese-wisdom-four-words/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&text=Primer on hacking Mifare Classic NFC"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&is_video=false&description=Primer on hacking Mifare Classic NFC"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Primer on hacking Mifare Classic NFC&body=Check out this article: https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&name=Primer on hacking Mifare Classic NFC&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&t=Primer on hacking Mifare Classic NFC"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Glossary"><span class="toc-number">1.</span> <span class="toc-text">Glossary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mifare-Classic-primer"><span class="toc-number">2.</span> <span class="toc-text">Mifare Classic primer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Passive-NFC"><span class="toc-number">2.1.</span> <span class="toc-text">Passive NFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-layout"><span class="toc-number">2.2.</span> <span class="toc-text">Memory layout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploits"><span class="toc-number">3.</span> <span class="toc-text">Exploits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Types-of-Mifare-cards"><span class="toc-number">4.</span> <span class="toc-text">Types of Mifare cards</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Primer on hacking Mifare Classic NFC
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leo Huang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-25T10:47:56.000Z" itemprop="datePublished">2025-03-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/hacking/" rel="tag">hacking</a>, <a class="tag-link-link" href="/tags/nfc/" rel="tag">nfc</a>, <a class="tag-link-link" href="/tags/programming/" rel="tag">programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>There is a lot of information out on the internet about Mifare Classic NFC<br>
+cards and the various exploits that they are subject to. However, the<br>
+information is often fragmented or assumes a lot of prior knowledge.</p>
+<p>This post aims to collect all the relevant information and provide a<br>
+high-level overview of the terminology and available exploits.</p>
+<h2 id="Glossary">Glossary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RFID</td>
+<td>Radio-frequency identification. This is quite a broad, catch-all term that encompasses any system that uses electromagnetic fields to identify tags and/or transmit data. Frequency and range varies.</td>
+</tr>
+<tr>
+<td>NFC</td>
+<td>Near Field Communications. A subset of RFID that specifically uses the 13.56MHz frequency, giving it roughly 4cm of range (hence “near field”). Defines a set of communication protocols.</td>
+</tr>
+<tr>
+<td>Mifare</td>
+<td>A brand of smart cards from the company NXP, operating on the 13.56MHz frequency. It’s an implementation on top of the NFC communication protocols and can be read by NFC card readers.</td>
+</tr>
+<tr>
+<td>NDEF</td>
+<td>NFC Data Exchange Format - a standardized way to exchange data between NFC tags and devices.</td>
+</tr>
+<tr>
+<td>SL1</td>
+<td>Security Level 1 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. Emulates Mifare Classic with standard CRYPTO1 cipher protocol.</td>
+</tr>
+<tr>
+<td>SL2</td>
+<td>Security Level 2 <sup class="footnote-ref"><a href="#fn1" id="fnref1:1">[1:1]</a></sup>. Combination of CRYPTO1 and AES.</td>
+</tr>
+<tr>
+<td>SL3</td>
+<td>Security Level 3 <sup class="footnote-ref"><a href="#fn1" id="fnref1:2">[1:2]</a></sup>. Most secure level offered by Mifare at the time of writing, using AES only.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Mifare-Classic-primer">Mifare Classic primer</h2>
+<p>While I’m not going to cover any of the concepts in detail, it’s important<br>
+to understand at least the following.</p>
+<h3 id="Passive-NFC">Passive NFC</h3>
+<p>Unlike the super early generation of RFID cards which literally only had a<br>
+publicly readable ID, Mifare smart cards use passive NFC technology to<br>
+receive data and compute a response.</p>
+<p>The card reader induces a current in the Mifare card via electromagnetic<br>
+fields, powering the Mifare card and allowing it to run the proprietary<br>
+CRYPTO1 algorithm on its<br>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit">ASIC</a>.</p>
+<p>Cloning a Mifare Classic card is not as trivially simple as reading data off<br>
+it and writing that data onto a blank card. The Mifare card contains<br>
+non-readable information and instead uses a cryptographic exchange to secure<br>
+its data.</p>
+<h3 id="Memory-layout">Memory layout</h3>
+<p>The Mifare Classic card consists of 16 sectors, each with four 16-byte<br>
+blocks. The last block contains:</p>
+<ul>
+<li>secret key A</li>
+<li>secret key B</li>
+<li>access rights of those two keys on the current sector</li>
+</ul>
+<p><img src="sectors.png" alt="Mifare Classic memory layout"></p>
+<p>The secret keys are 48 bits in length. Typically, key A is used for reading<br>
+the sector data, while key B is used for writing. However, the rights can be<br>
+arbitrarily defined in the access rights section. I won’t go into detail<br>
+about the format of the access rights.</p>
+<p>Typically, key A and key B are different. This allows a valid card reader to<br>
+possess key A and read data, while key B is only known by the master<br>
+programming device.</p>
+<p>It’s entirely possible for each of the 16 sectors to have different keys,<br>
+but typically all the sectors share the same key A and key B.</p>
+<p>There are a list of default keys with special meaning, such as:</p>
+<ul>
+<li><code>FFFFFFFFFFFF</code> is loaded as the default key for A and B on a blank chip</li>
+<li><code>D3F7D3F7D3F7</code> must be set for key A if the Mifare Classic tag contains<br>
+NDEF data</li>
+<li>…many more</li>
+</ul>
+<h2 id="Exploits">Exploits</h2>
+<p>See <a target="_blank" rel="noopener" href="https://www.blackhat.com/docs/sp-14/materials/arsenal/sp-14-Almeida-Hacking-MIFARE-Classic-Cards-Slides.pdf">these slides</a> from a Black Hat conference.</p>
+<table>
+<thead>
+<tr>
+<th>Exploit</th>
+<th>Goal</th>
+<th>Time required</th>
+<th>Cards vulnerable</th>
+<th>Tools</th>
+<th>Paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brute-force default keys</td>
+<td>Recover any key</td>
+<td>~10 seconds</td>
+<td>All</td>
+<td>mfoc, MCT</td>
+<td></td>
+</tr>
+<tr>
+<td>Brute-force leaked keys</td>
+<td>Recover any key</td>
+<td>1 minute</td>
+<td>All</td>
+<td>mfoc with custom list, MCT with included “extended” list</td>
+<td></td>
+</tr>
+<tr>
+<td>Darkside attack</td>
+<td>Recover any key</td>
+<td>~1 hour</td>
+<td>Original Mifare Classic only</td>
+<td>mfcuk</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>Nested attack</td>
+<td>Recover other key</td>
+<td>~10 seconds</td>
+<td>Original Mifare Classic only</td>
+<td>mfoc</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>Hard-nested attack</td>
+<td>Recover other key</td>
+<td>???</td>
+<td>Mifare Classic, Mifare Plus, maybe all?</td>
+<td>mfoc-hardnested, miLazyCracker</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>CPU brute-force</td>
+<td>Recover any key</td>
+<td>~4 years</td>
+<td>All</td>
+<td>Consumer-grade computer</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>GPU brute-force</td>
+<td>Recover any key</td>
+<td>~10 hours</td>
+<td>All</td>
+<td>Extremely expensive GPU or FPGA array</td>
+<td>TODO</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Types-of-Mifare-cards">Types of Mifare cards</h2>
+<p>There are a staggering number of different Mifare cards, and information<br>
+available on the internet does not tend to reliably specify the exact type<br>
+of Mifare card that is being talked about.</p>
+<p>The most notorious and commonly mentioned variant is the Mifare Classic 1K,<br>
+which was <em>the</em> most popular smart card on the market, and remains<br>
+ubiquitous in a large range of applications (swipe card access, public<br>
+transit, etc) despite it’s well known and well publicised vulnerabilities.</p>
+<p>However, successfully exploiting the Mifare Classic 1K first requires that<br>
+you’re actually working with a Mifare Classic 1K. This is not so easy to<br>
+ascertain, and most of the information on the internet glosses over this<br>
+critically important step of identifying the exact card. There are a lot of<br>
+variants that are resistant to the known vulnerabilities to different levels.</p>
+<p>Roughly speaking, there are the following families (non-exhaustive list):</p>
+<ul>
+<li>Mifare Classic</li>
+<li>Mifare Plus</li>
+<li>Mifare UltraLight</li>
+<li>Mifare DESFire</li>
+<li>SmartMX</li>
+</ul>
+<p>And within each family, there are ~3-10 variants. A more comprehensive<br>
+listing and guide to identifying can be found at the MIFARE<br>
+type identification procedure <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>.</p>
+<p>Ultimately, for the purpose of running exploits against the card, all you<br>
+really need to know is:</p>
+<ol>
+<li>Is it literally the original, trivial to exploit Mifare Classic 1K?</li>
+<li>Is it something else emulating the Mifare Classic protocol?</li>
+</ol>
+<p>If either of the above is true, you can try and run some of the well-known<br>
+exploits against the cards:</p>
+<ol>
+<li>Attempt to recover at least one key by brute-forcing default keys, or<br>
+leaked keys, or using a darkside attack</li>
+<li>Attempt to recover the other keys by using a nested attack</li>
+</ol>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a target="_blank" rel="noopener" href="https://tech.springcard.com/2011/mifare-plus-in-a-nutshell/">https://tech.springcard.com/2011/mifare-plus-in-a-nutshell/</a> <a href="#fnref1" class="footnote-backref">↩︎</a> <a href="#fnref1:1" class="footnote-backref">↩︎</a> <a href="#fnref1:2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a target="_blank" rel="noopener" href="https://www.nxp.com/docs/en/application-note/AN10833.pdf">https://www.nxp.com/docs/en/application-note/AN10833.pdf</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Glossary"><span class="toc-number">1.</span> <span class="toc-text">Glossary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mifare-Classic-primer"><span class="toc-number">2.</span> <span class="toc-text">Mifare Classic primer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Passive-NFC"><span class="toc-number">2.1.</span> <span class="toc-text">Passive NFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-layout"><span class="toc-number">2.2.</span> <span class="toc-text">Memory layout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploits"><span class="toc-number">3.</span> <span class="toc-text">Exploits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Types-of-Mifare-cards"><span class="toc-number">4.</span> <span class="toc-text">Types of Mifare cards</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&text=Primer on hacking Mifare Classic NFC"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&is_video=false&description=Primer on hacking Mifare Classic NFC"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Primer on hacking Mifare Classic NFC&body=Check out this article: https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&title=Primer on hacking Mifare Classic NFC"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&name=Primer on hacking Mifare Classic NFC&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/&t=Primer on hacking Mifare Classic NFC"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Leo Huang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'cbreezier/cbreezier.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'utterances';
+      var utterances_theme = 'photon-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

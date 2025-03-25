@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="If there’s one thing that frustrates me, it’s Terminology That Doesn’t Really Mean Anything. And the world of WiFi infrastructure appears to be full of them, from vague technical specifications to mea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WiFi infrastructure demystified - APs vs WDS vs Mesh">
+<meta property="og:url" content="https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/">
+<meta property="og:site_name" content="A blog">
+<meta property="og:description" content="If there’s one thing that frustrates me, it’s Terminology That Doesn’t Really Mean Anything. And the world of WiFi infrastructure appears to be full of them, from vague technical specifications to mea">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-25T10:46:50.000Z">
+<meta property="article:modified_time" content="2025-03-25T10:46:50.539Z">
+<meta property="article:author" content="Leo Huang">
+<meta property="article:tag" content="networking">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>WiFi infrastructure demystified - APs vs WDS vs Mesh</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/25/Primer-on-hacking-Mifare-Classic-NFC/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/06/01/How-to-host-a-private-blog/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&text=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&is_video=false&description=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WiFi infrastructure demystified - APs vs WDS vs Mesh&body=Check out this article: https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&name=WiFi infrastructure demystified - APs vs WDS vs Mesh&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&t=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Back-haul"><span class="toc-number">1.</span> <span class="toc-text">Back-haul</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Wired"><span class="toc-number">1.1.</span> <span class="toc-text">Wired</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cat6-Cat5e-Cat5-Ethernet"><span class="toc-number">1.1.1.</span> <span class="toc-text">Cat6&#x2F;Cat5e&#x2F;Cat5 Ethernet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ethernet-over-Power"><span class="toc-number">1.1.2.</span> <span class="toc-text">Ethernet over Power</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wireless"><span class="toc-number">1.2.</span> <span class="toc-text">Wireless</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Repeaters-Extenders"><span class="toc-number">1.2.1.</span> <span class="toc-text">Repeaters &#x2F; Extenders</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WDS-Wireless-Distribution-System"><span class="toc-number">1.2.2.</span> <span class="toc-text">WDS (Wireless Distribution System)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IEEE-802-11s-WiFi-Mesh"><span class="toc-number">1.2.3.</span> <span class="toc-text">IEEE 802.11s - WiFi Mesh?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Single-vs-dual-multi-radio-nodes"><span class="toc-number">1.2.4.</span> <span class="toc-text">Single vs dual&#x2F;multi radio nodes</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Roaming"><span class="toc-number">2.</span> <span class="toc-text">Roaming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#All-roaming-decisions-are-client-led"><span class="toc-number">2.1.</span> <span class="toc-text">All roaming decisions are client-led</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-an-SSID"><span class="toc-number">2.2.</span> <span class="toc-text">Sharing an SSID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MCA-multi-channel-architecture"><span class="toc-number">2.3.</span> <span class="toc-text">MCA - multi channel architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SCA-single-channel-architecture"><span class="toc-number">2.4.</span> <span class="toc-text">SCA - single channel architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-Roaming-802-11-k-v-r"><span class="toc-number">2.5.</span> <span class="toc-text">Fast Roaming - 802.11&#x2F;k&#x2F;v&#x2F;r</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11k-Assisted-roaming-with-neighbour-report"><span class="toc-number">2.5.1.</span> <span class="toc-text">802.11k - Assisted roaming with neighbour report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11v-Client-steering"><span class="toc-number">2.5.2.</span> <span class="toc-text">802.11v - Client steering</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11r-Fast-transition"><span class="toc-number">2.5.3.</span> <span class="toc-text">802.11r - Fast transition</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">3.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        WiFi infrastructure demystified - APs vs WDS vs Mesh
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leo Huang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-03-25T10:46:50.000Z" itemprop="datePublished">2025-03-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/networking/" rel="tag">networking</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>If there’s one thing that frustrates me, it’s Terminology That Doesn’t Really<br>
+Mean Anything. And the world of WiFi infrastructure appears to be full of them,<br>
+from vague technical specifications to meaningless marketing terms.</p>
+<p>Let’s cut through the jargon and try and distill all of the confusing<br>
+terminology into what they truly mean.</p>
+<p>This post assumes some basic understanding of WiFi networking. I’ll be<br>
+focusing on covering concepts that relate to the infrastructure and topology<br>
+of a network with multiple components to it. The only components we’re<br>
+really interested in are:</p>
+<ul>
+<li>the nodes (eg, WAPs, repeaters, even switches)</li>
+<li>the clients (eg, laptop or smartphone)</li>
+</ul>
+<p>I don’t think that “node” is standard terminology, but I don’t know of a<br>
+better catch-all to use. Essentially, I’m referring to all the components of<br>
+the WiFi infrastructure that eventually route client packets to the internet.</p>
+<hr>
+<p>This post will be broken down into two main sections: <strong>back-haul</strong> and<br>
+<strong>roaming</strong>.</p>
+<p>Back-haul refers to the way the nodes talk to each other.</p>
+<p>Roaming refers to the way that clients switch between which node they’re<br>
+connected to.</p>
+<p>Ultimately, regardless of what you call it, almost every decision you make<br>
+in terms of configuring your WiFi infrastructure and topology comes down to<br>
+features and trade-offs relating to these two concepts.</p>
+<h2 id="Back-haul">Back-haul</h2>
+<p>You can think of the back-haul as the core of the network, whereas the<br>
+clients that connect to the nodes sit on the edge of this infrastructure.</p>
+<p>Within the different kinds of back-haul, we’re going to split it again into<br>
+two main categories: wired and wireless.</p>
+<h3 id="Wired">Wired</h3>
+<p>With a wired back-haul, the pieces of infrastructure are connected via<br>
+physical cables. This is simple, performant, and generally the best choice<br>
+if possible.</p>
+<p>Of course, the problem is that running cabling across a site may be<br>
+prohibitively expensive or difficult.</p>
+<h4 id="Cat6-Cat5e-Cat5-Ethernet">Cat6/Cat5e/Cat5 Ethernet</h4>
+<p>This is the traditional, reliable back-haul with no compromises on performance.<br>
+Ethernet is full duplex, low latency, and low packet loss.</p>
+<p>If this is a viable option, there’s no reason to consider wireless back-haul.</p>
+<h4 id="Ethernet-over-Power">Ethernet over Power</h4>
+<p>If you can’t run dedicated Ethernet cabling, you can use Ethernet over Power<br>
+adapters to leverage your existing mains power cables.</p>
+<p>It’s honestly not bad…when it works. There will be significantly more<br>
+interference due to the high voltage running through the cabling at the same<br>
+time, and therefore packet loss.</p>
+<p>You also have to worry about which circuits you’re running your ethernet<br>
+over; if your destination is on a different circuit and you have to go<br>
+through a breaker, it may not work as well.</p>
+<p>If you have completely disjoint circuits (eg, 3-phase power), you will obviously<br>
+not be able to connect across them.</p>
+<h3 id="Wireless">Wireless</h3>
+<p>This is where it gets interesting. Instead of a wired backbone, the nodes<br>
+can communicate wirelessly.</p>
+<h4 id="Repeaters-Extenders">Repeaters / Extenders</h4>
+<p>The meaning of this term seems to differ between different sources. However,<br>
+the most common definition seems to be cheap, simple devices that simply<br>
+rebroadcast any WiFi packets that they pick up.</p>
+<p>The repeaters are typically configured to be on the same channel as the node<br>
+that they’re repeating.</p>
+<p>An analogy would be a bunch of people playing Chinese whispers, except<br>
+they’re actually kind of far apart and they’re all shouting. You can hear<br>
+the closest person pretty well, but you can also kind of hear the person<br>
+further away, and they try and take turns shouting but sometimes they shout at<br>
+the same time and you have to ask them to say it again, and you have to wait for<br>
+them to take turns shouting each message up the chain.</p>
+<p>The bandwidth decreases by 50% for each repeater, because they have to take<br>
+turns shouting up the chain.</p>
+<p>The interference gets pretty bad because they’re all on the same channel.</p>
+<p>Why don’t repeaters receive on one channel and then shout on another? One<br>
+reason I’ve seen is that these cheap repeaters typically only have one<br>
+hardware radio. Switching the physical radio to transmit/receive on different<br>
+channels isn’t instantaneous, so it can make things slower or<br>
+even miss packets.</p>
+<p>Another reason is to avoid hogging all available channels in your area and<br>
+deprive your neighbours of usable frequencies.</p>
+<h4 id="WDS-Wireless-Distribution-System">WDS (Wireless Distribution System)</h4>
+<p>This specification is supposed to enable a multi-hop, wireless back-haul<br>
+network to be established. It’s an earlier technology and certainly could be<br>
+classified as a “mesh” technology.</p>
+<p>However, this isn’t actually a full specification - it doesn’t prescribe any<br>
+particular routing algorithm. This causes different manufacturers to<br>
+implement different proprietary routing protocols that aren’t compatible<br>
+with each other.</p>
+<p>Specifically, WDS simply defines a 4th address to be added to each packet:</p>
+<ul>
+<li>intended receiver</li>
+<li>transmitting node</li>
+<li>BSSID of the network</li>
+<li>original sender (new 4th field added by WDS)</li>
+</ul>
+<p>So WDS describes the packet format that makes a multi-hop, mesh-y back-haul<br>
+<em>possible</em>, but it’s really kind of meaningless and completely misunderstood<br>
+and misrepresented in most places.</p>
+<p>It’s not even really explicitly defined in the IEEE 802.11-1999 standard -<br>
+it’s kind of just <em>mentioned</em>. It’s not until 2005 that its meaning is<br>
+clarified in <a target="_blank" rel="noopener" href="https://www.ieee802.org/1/files/public/802_architecture_group/802-11/4-address-format.doc">802.11-05/0710r0</a>.</p>
+<h4 id="IEEE-802-11s-WiFi-Mesh">IEEE 802.11s - WiFi Mesh?</h4>
+<p>An extension to the IEEE 802.11 standard for WiFi that was eventually<br>
+ratified in 2012, this actually does describe a routing protocol (on top of<br>
+the 4-address format defined by WDS).</p>
+<p>The nice thing is that if you can find multiple routers that support 802.11s,<br>
+even across different brands, they should be interoperable.</p>
+<p>However, this standard is not commonly<br>
+implemented among manufacturers. <strong>Sometimes when vendors say “mesh” they mean<br>
+802.11s</strong>. More often than not, they’ll be implementing their own proprietary<br>
+routing protocol for their products which isn’t compatible with any other brand.</p>
+<h4 id="Single-vs-dual-multi-radio-nodes">Single vs dual/multi radio nodes</h4>
+<p>If a node only has a single physical radio, it cannot simultaneously<br>
+transmit and receive. This means that the available bandwidth is effectively halved.</p>
+<p>However, nodes with multiple radios can receive on one radio and transmit on<br>
+the other. For example, an access point may talk to the back-haul<br>
+infrastructure on 5Ghz while connecting to clients on 2.4Ghz.</p>
+<h2 id="Roaming">Roaming</h2>
+<p>The back-haul is all about the infrastructure, but we haven’t said anything<br>
+about how client devices connect to said infrastructure. In practice, the<br>
+decision about what kind of interface to present to client devices really<br>
+comes down to what you want to achieve in terms of roaming.</p>
+<p>At any point in time, a client device is able to see multiple candidates to<br>
+connect to. As a high level summary, each candidate is uniquely identified<br>
+by a combination of:</p>
+<ul>
+<li>SSID (the “name” of the WiFi network)</li>
+<li>Channel (the exact frequency being broadcasted on)</li>
+<li>Mac address (the hardware identifier of the AP)</li>
+<li>Authentication (eg, the password)</li>
+</ul>
+<h3 id="All-roaming-decisions-are-client-led">All roaming decisions are client-led</h3>
+<p>When a client device sees multiple candidates that it can connect to, all<br>
+decisions about whether to switch from one candidate to another is done by<br>
+the device. Historically, there has been very little that an AP can do to<br>
+influence that decision.</p>
+<h3 id="Sharing-an-SSID">Sharing an SSID</h3>
+<p>Broadcasting the same SSID and authentication on different APs is the<br>
+general strategy to make all of the APs appear as one cohesive system. To<br>
+the end user, there will only be a single WiFi network.</p>
+<p>However, the device is aware that there are multiple APs and therefore<br>
+multiple connection candidates, because the channel and mac address may be<br>
+different for each AP.</p>
+<h3 id="MCA-multi-channel-architecture">MCA - multi channel architecture</h3>
+<p>This is the “standard” setup, where each AP broadcasts on a different<br>
+channel. This is important to avoid interference with each other.</p>
+<p>In this architecture, all roaming decisions are client-led (eg, by the<br>
+mobile device).</p>
+<h3 id="SCA-single-channel-architecture">SCA - single channel architecture</h3>
+<p>This is a general concept, not an exact specification or technology.<br>
+Different manufacturers implement this differently and call it different<br>
+names. The idea here is for every AP to broadcast on the exact same channel<br>
+and even spoof the same mac address.</p>
+<p>This prevents the client device from even realising that there are multiple<br>
+APs, and therefore removes the ability for the client device to perform any<br>
+roaming decisions.</p>
+<p>Instead, the responsibility is shifted completely onto the APs. In such a<br>
+system, it’s crucial for the APs to be able to communicate with each other<br>
+over the back-haul network in order to negotiate which one will be in charge<br>
+of talking to the client device.</p>
+<p>Such an architecture allows for the greatest control over roaming, and the<br>
+theoretical best hand-off between APs. Poor roaming decisions on clients are<br>
+completely bypassed, and it’s possible to achieve “zero handoff” where the<br>
+switch in AP is immediate and transparent to the client.</p>
+<p>However, there are also some big disadvantages. Sharing the same channel<br>
+makes the entire system more vulnerable to external interference, while also<br>
+reducing the available bandwidth (can’t make use of multiple channels). The<br>
+implementation of SCA is also hugely variable and proprietary, so you’re<br>
+heavily subject to vendor lock-in on a single brand.</p>
+<p>The biggest issue is that there is a huge burden of complexity placed on the<br>
+controller in charge of making all these roaming decisions. While SCA offers<br>
+the greatest <em>theoretical</em> roaming performance, in practice these systems<br>
+don’t always work so well.</p>
+<p>SCA systems tend to be very enterprise and very expensive.</p>
+<h3 id="Fast-Roaming-802-11-k-v-r">Fast Roaming - 802.11/k/v/r</h3>
+<p>There are a relatively new set of standards that intend to improve roaming<br>
+performance. They all operate in a standard Multi-Channel Architecture, and<br>
+describe a co-operative roaming experience between the client and the APs.</p>
+<p>The transition towards these modern standards highlight the biggest change<br>
+in the WiFi roaming landscape in recent years - clients have become much<br>
+more sophisticated (think smartphones) and no longer tend to make incredibly<br>
+bad roaming decisions.</p>
+<h4 id="802-11k-Assisted-roaming-with-neighbour-report">802.11k - Assisted roaming with neighbour report</h4>
+<p>APs help clients find other nearby APs to roam to by providing a “Neighbour<br>
+Report”, which reduces the time a client needs to spend scanning for APs itself.</p>
+<h4 id="802-11v-Client-steering">802.11v - Client steering</h4>
+<p>Allows APs to actively provide roaming suggestions to clients.</p>
+<h4 id="802-11r-Fast-transition">802.11r - Fast transition</h4>
+<p>Speeds up roaming transitions by greatly reducing the time spent during<br>
+reauthentication with a new AP, which involves a 4-way handshake. This standard<br>
+allows APs to pre-negotiate encryption keys.</p>
+<h2 id="Closing-thoughts">Closing thoughts</h2>
+<p>Now that we’ve torn away the marketing facade and exposed the fundamental<br>
+technologies that actually underpin a WiFi network, I hope you’re suitably<br>
+confused.</p>
+<p>Maybe it’s a good thing to just spout “WiFi Mesh” while waggling our hands<br>
+after all.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Back-haul"><span class="toc-number">1.</span> <span class="toc-text">Back-haul</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Wired"><span class="toc-number">1.1.</span> <span class="toc-text">Wired</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cat6-Cat5e-Cat5-Ethernet"><span class="toc-number">1.1.1.</span> <span class="toc-text">Cat6&#x2F;Cat5e&#x2F;Cat5 Ethernet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ethernet-over-Power"><span class="toc-number">1.1.2.</span> <span class="toc-text">Ethernet over Power</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wireless"><span class="toc-number">1.2.</span> <span class="toc-text">Wireless</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Repeaters-Extenders"><span class="toc-number">1.2.1.</span> <span class="toc-text">Repeaters &#x2F; Extenders</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WDS-Wireless-Distribution-System"><span class="toc-number">1.2.2.</span> <span class="toc-text">WDS (Wireless Distribution System)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IEEE-802-11s-WiFi-Mesh"><span class="toc-number">1.2.3.</span> <span class="toc-text">IEEE 802.11s - WiFi Mesh?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Single-vs-dual-multi-radio-nodes"><span class="toc-number">1.2.4.</span> <span class="toc-text">Single vs dual&#x2F;multi radio nodes</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Roaming"><span class="toc-number">2.</span> <span class="toc-text">Roaming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#All-roaming-decisions-are-client-led"><span class="toc-number">2.1.</span> <span class="toc-text">All roaming decisions are client-led</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-an-SSID"><span class="toc-number">2.2.</span> <span class="toc-text">Sharing an SSID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MCA-multi-channel-architecture"><span class="toc-number">2.3.</span> <span class="toc-text">MCA - multi channel architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SCA-single-channel-architecture"><span class="toc-number">2.4.</span> <span class="toc-text">SCA - single channel architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-Roaming-802-11-k-v-r"><span class="toc-number">2.5.</span> <span class="toc-text">Fast Roaming - 802.11&#x2F;k&#x2F;v&#x2F;r</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11k-Assisted-roaming-with-neighbour-report"><span class="toc-number">2.5.1.</span> <span class="toc-text">802.11k - Assisted roaming with neighbour report</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11v-Client-steering"><span class="toc-number">2.5.2.</span> <span class="toc-text">802.11v - Client steering</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#802-11r-Fast-transition"><span class="toc-number">2.5.3.</span> <span class="toc-text">802.11r - Fast transition</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Closing-thoughts"><span class="toc-number">3.</span> <span class="toc-text">Closing thoughts</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&text=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&is_video=false&description=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WiFi infrastructure demystified - APs vs WDS vs Mesh&body=Check out this article: https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&title=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&name=WiFi infrastructure demystified - APs vs WDS vs Mesh&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/03/25/WiFi-infrastructure-types-APs-vs-WDS-vs-Mesh/&t=WiFi infrastructure demystified - APs vs WDS vs Mesh"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Leo Huang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'cbreezier/cbreezier.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'utterances';
+      var utterances_theme = 'photon-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

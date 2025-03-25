@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="It’s 2024, and there’s generally no excuse for any website to be served over  HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and  difficult to manage, ever since Let’s Enc">
+    <meta name="description" content="It’s 2024, and there’s generally no excuse for any website to be served over HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and difficult to manage, ever since Let’s Encrypt la">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TLS certificates for locally hosted webservices">
 <meta property="og:url" content="https://leohuang.dev/2024/04/08/TLS-certificates-for-locally-hosted-webservices/">
 <meta property="og:site_name" content="A blog">
-<meta property="og:description" content="It’s 2024, and there’s generally no excuse for any website to be served over  HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and  difficult to manage, ever since Let’s Enc">
+<meta property="og:description" content="It’s 2024, and there’s generally no excuse for any website to be served over HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and difficult to manage, ever since Let’s Encrypt la">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://leohuang.dev/2024/04/08/TLS-certificates-for-locally-hosted-webservices/your_connection_is_not_private.png">
 <meta property="og:image" content="https://leohuang.dev/2024/04/08/TLS-certificates-for-locally-hosted-webservices/hsts_preload_active.png">
@@ -151,135 +151,140 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>It’s 2024, and there’s generally no excuse for any website to be served over 
-HTTP instead of HTTPS. While SSL&#x2F;TLS certificates used to be expensive and 
-difficult to manage, ever since Let’s Encrypt launched in 2016 it’s become 
-almost unnervingly simple to generate valid certificates for your own 
+    <p>It’s 2024, and there’s generally no excuse for any website to be served over<br>
+HTTP instead of HTTPS. While SSL/TLS certificates used to be expensive and<br>
+difficult to manage, ever since Let’s Encrypt launched in 2016 it’s become<br>
+almost unnervingly simple to generate valid certificates for your own<br>
 websites for the exceedingly low price of Free.</p>
-<p>But what about locally hosted websites? That is, websites that are hosted on 
-your local machine, or another machine on your LAN (Local Area Network). 
-These websites might be accessed via something like <a target="_blank" rel="noopener" href="http://192.168.1.123:8093/">http:&#x2F;&#x2F;192.168.1.123:8093</a></p>
-<p>There’s nothing terribly wrong about this; if you’re following tutorials to 
-set up your home lab, you’ll likely have a whole bunch of services that look 
-like this. But there are also several reasons why you might <em>not</em> want to 
+<p>But what about locally hosted websites? That is, websites that are hosted on<br>
+your local machine, or another machine on your LAN (Local Area Network).<br>
+These websites might be accessed via something like <a target="_blank" rel="noopener" href="http://192.168.1.123:8093">http://192.168.1.123:8093</a></p>
+<p>There’s nothing terribly wrong about this; if you’re following tutorials to<br>
+set up your home lab, you’ll likely have a whole bunch of services that look<br>
+like this. But there are also several reasons why you might <em>not</em> want to<br>
 access them via HTTP and the LAN IP:</p>
 <ul>
-<li>It’s kind of ugly and you’d like to be able to use a nicer name like 
-<a target="_blank" rel="noopener" href="https://subdomain.mydomain.com/">https:&#x2F;&#x2F;subdomain.mydomain.com</a></li>
+<li>It’s kind of ugly and you’d like to be able to use a nicer name like<br>
+<a target="_blank" rel="noopener" href="https://subdomain.mydomain.com">https://subdomain.mydomain.com</a></li>
 <li>The “Not Secure” badge in the address bar upsets you</li>
-<li>Sometimes your browser shows a big scary warning screen and you have to 
+<li>Sometimes your browser shows a big scary warning screen and you have to<br>
 click lots of buttons to proceed (yes, two buttons is <em>lots</em>)</li>
 <li>You want to use <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts/features_restricted_to_secure_contexts">modern web APIs that are restricted to secure contexts</a></li>
 </ul>
-<p><img src="/2024/04/08/TLS-certificates-for-locally-hosted-webservices/your_connection_is_not_private.png" alt="Your connection is not private"></p>
+<p><img src="your_connection_is_not_private.png" alt="Your connection is not private"></p>
 <div style="text-align: center"><em>Did you know that in Chrome, you 
 can type thisisunsafe to get past this screen?</em></div>
-
-<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>Just a quick note here about how to make something like <a target="_blank" rel="noopener" href="https://subdomain.mydomain.com/">https:&#x2F;&#x2F;subdomain.mydomain.com</a>
+<h2 id="DNS">DNS</h2>
+<p>Just a quick note here about how to make something like <a target="_blank" rel="noopener" href="https://subdomain.mydomain.com">https://subdomain.mydomain.com</a><br>
 point to your non-web-accessible server at 192.168.1.123.</p>
-<p>It’s actually very simple - remember that DNS just resolves a domain name to an IP address. 
-While it may be better to run your own <a target="_blank" rel="noopener" href="https://www.isc.org/bind/">local DNS server</a>,
-there’s really nothing stopping you from using something like <a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">Cloudflare DNS</a>
+<p>It’s actually very simple - remember that DNS just resolves a domain name to an IP address.<br>
+While it may be better to run your own <a target="_blank" rel="noopener" href="https://www.isc.org/bind/">local DNS server</a>,<br>
+there’s really nothing stopping you from using something like <a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/">Cloudflare DNS</a><br>
 to let the whole world know that some domain should resolve to a local IP.</p>
 <p>It doesn’t make your local LAN any more accessible to the outside internet.</p>
-<h3 id="HSTS-preload-list"><a href="#HSTS-preload-list" class="headerlink" title="HSTS preload list"></a>HSTS preload list</h3><p>By the way, there’s <em>another</em> reason why you might <em>need</em> a TLS certificate. 
+<h3 id="HSTS-preload-list">HSTS preload list</h3>
+<p>By the way, there’s <em>another</em> reason why you might <em>need</em> a TLS certificate.<br>
 Originally, I was happy to just set up DNS and access my sites via HTTP.</p>
-<p>But there’s this thing called the <a target="_blank" rel="noopener" href="https://hstspreload.org/">HSTS preload list</a>
-which is hard-coded into modern browsers. Any domain that appears on this 
-list is forced to upgrade to HTTPS, even if it was originally accessed via 
+<p>But there’s this thing called the <a target="_blank" rel="noopener" href="https://hstspreload.org/">HSTS preload list</a><br>
+which is hard-coded into modern browsers. Any domain that appears on this<br>
+list is forced to upgrade to HTTPS, even if it was originally accessed via<br>
 HTTP and the webserver didn’t request an upgrade.</p>
-<p>The surprising part is that Google <a target="_blank" rel="noopener" href="https://endtimes.dev/dev-and-hsts-preload/#other-domains">added all of the TLDs that it owns
-to the HSTS preload list</a>. 
-This means that if you have a <code>.dev</code> or a <code>.you</code> domain or any of the other 
-50+ TLDs that Google owns, you literally <em>must</em> have a valid TLS certificate 
+<p>The surprising part is that Google <a target="_blank" rel="noopener" href="https://endtimes.dev/dev-and-hsts-preload/#other-domains">added all of the TLDs that it owns<br>
+to the HSTS preload list</a>.<br>
+This means that if you have a <code>.dev</code> or a <code>.you</code> domain or any of the other<br>
+50+ TLDs that Google owns, you literally <em>must</em> have a valid TLS certificate<br>
 for your websites.</p>
-<p><img src="/2024/04/08/TLS-certificates-for-locally-hosted-webservices/hsts_preload_active.png" alt="All .dev domains are preloaded"></p>
+<p><img src="hsts_preload_active.png" alt="All .dev domains are preloaded"></p>
 <div style="text-align: center"><em>Thanks Google. I mean, it's a 
 good thing, but still...</em></div>
-
-<h2 id="Standard-Let’s-Encrypt-setup"><a href="#Standard-Let’s-Encrypt-setup" class="headerlink" title="Standard Let’s Encrypt setup"></a>Standard Let’s Encrypt setup</h2><p>The problem is that the most stock-standard method of deploying Let’s Encrypt 
-certificates requires that your website is accessible to the public internet,
-so that Let’s Encrypt’s servers can access a file on your webserver and prove
+<h2 id="Standard-Let’s-Encrypt-setup">Standard Let’s Encrypt setup</h2>
+<p>The problem is that the most stock-standard method of deploying Let’s Encrypt<br>
+certificates requires that your website is accessible to the public internet,<br>
+so that Let’s Encrypt’s servers can access a file on your webserver and prove<br>
 that you have control over that webserver. The process looks something like this:</p>
 <ol>
 <li>You install <code>certbot</code> on your webserver, which automates the whole process</li>
-<li><code>certbot</code> puts a file on your webserver which contains a special token, 
+<li><code>certbot</code> puts a file on your webserver which contains a special token,<br>
 making it accessible at <code>http://&lt;YOUR_DOMAIN&gt;/.well-known/acme-challenge/&lt;TOKEN&gt;</code></li>
-<li>Let’s Encrypt’s servers access that file, verifies its authenticity, and 
+<li>Let’s Encrypt’s servers access that file, verifies its authenticity, and<br>
 issues you a certificate</li>
-<li><code>certbot</code> can even update your webserver configuration to use this 
+<li><code>certbot</code> can even update your webserver configuration to use this<br>
 certificate to properly handle TLS termination</li>
 </ol>
-<p>This is called the <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/challenge-types/">HTTP-01 challenge</a>, and you can issue a certificate for a 
-particular domain using this method. The main benefit is that the entire 
-process is <em>entirely automated</em>, since <code>certbot</code> can modify your webserver 
+<p>This is called the <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/challenge-types/">HTTP-01 challenge</a>, and you can issue a certificate for a<br>
+particular domain using this method. The main benefit is that the entire<br>
+process is <em>entirely automated</em>, since <code>certbot</code> can modify your webserver<br>
 to pass the challenge. It can even handle renewals, which is <em>amazing</em>.</p>
-<h2 id="Some-sub-optimal-workarounds"><a href="#Some-sub-optimal-workarounds" class="headerlink" title="Some sub-optimal workarounds"></a>Some sub-optimal workarounds</h2><h3 id="Temporarily-make-your-local-webserver-public-accessible"><a href="#Temporarily-make-your-local-webserver-public-accessible" class="headerlink" title="Temporarily make your local webserver public accessible"></a>Temporarily make your local webserver public accessible</h3><p>After letting <code>certbot</code> and Let’s Encrypt complete the HTTP-01 challenge 
-successfully, you could turn off your port forwarding and you would have a 
-valid certificate…for 90 days. Have fun doing that every 90 days for 
-certificate renewal, not to mention how icky is feels to have your private 
+<h2 id="Some-sub-optimal-workarounds">Some sub-optimal workarounds</h2>
+<h3 id="Temporarily-make-your-local-webserver-public-accessible">Temporarily make your local webserver public accessible</h3>
+<p>After letting <code>certbot</code> and Let’s Encrypt complete the HTTP-01 challenge<br>
+successfully, you could turn off your port forwarding and you would have a<br>
+valid certificate…for 90 days. Have fun doing that every 90 days for<br>
+certificate renewal, not to mention how icky is feels to have your private<br>
 webservers open to attack, even temporarily.</p>
-<h3 id="Be-your-own-Certificate-Authority"><a href="#Be-your-own-Certificate-Authority" class="headerlink" title="Be your own Certificate Authority"></a>Be your own Certificate Authority</h3><p>Instead of letting Let’s Encrypt or some other recognised CA sign your 
-certificates, you could become your own CA and sign certificates for your 
-services. But this means that every device that you want to use with your 
-services has to recognise your new CA by installing the CA root certificate 
+<h3 id="Be-your-own-Certificate-Authority">Be your own Certificate Authority</h3>
+<p>Instead of letting Let’s Encrypt or some other recognised CA sign your<br>
+certificates, you could become your own CA and sign certificates for your<br>
+services. But this means that every device that you want to use with your<br>
+services has to recognise your new CA by installing the CA root certificate<br>
 on it.</p>
-<p>Good luck doing that for your computer(s), mobile devices, your spouse’s 
+<p>Good luck doing that for your computer(s), mobile devices, your spouse’s<br>
 devices, any guests that come over…</p>
-<h2 id="Confusing-advice-out-there"><a href="#Confusing-advice-out-there" class="headerlink" title="Confusing advice out there"></a>Confusing advice out there</h2><p>The main reason I wrote this post is because it’s surprisingly difficult to 
-find the (really quite simple) solution to this problem. There’s even a 
-page from 
-the official Let’s Encrypt website that talks about <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/certificates-for-localhost/">certificates for 
-localhost</a> that 
+<h2 id="Confusing-advice-out-there">Confusing advice out there</h2>
+<p>The main reason I wrote this post is because it’s surprisingly difficult to<br>
+find the (really quite simple) solution to this problem. There’s even a<br>
+page from<br>
+the official Let’s Encrypt website that talks about <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/certificates-for-localhost/">certificates for<br>
+localhost</a> that<br>
 seems relevant and is often linked to, but really isn’t.</p>
-<p>That page talks about the very specific case about a native app deployed 
-alongside a webserver to be run on <code>localhost</code>, and the difficulties of 
+<p>That page talks about the very specific case about a native app deployed<br>
+alongside a webserver to be run on <code>localhost</code>, and the difficulties of<br>
 getting a valid certificate issued in this case.</p>
-<h2 id="DNS-01-challenge"><a href="#DNS-01-challenge" class="headerlink" title="DNS-01 challenge"></a>DNS-01 challenge</h2><p>The <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/challenge-types/">DNS-01 challenge</a> is 
-another method of proving ownership of a domain to issue a certificate. In 
-fact, it’s actually a <em>stronger</em> proof than the HTTP-01 challenge because it 
-proves that you own the entire domain (including all sub-domains), instead 
-of just a single domain name. This means you can issue wildcard certificates 
+<h2 id="DNS-01-challenge">DNS-01 challenge</h2>
+<p>The <a target="_blank" rel="noopener" href="https://letsencrypt.org/docs/challenge-types/">DNS-01 challenge</a> is<br>
+another method of proving ownership of a domain to issue a certificate. In<br>
+fact, it’s actually a <em>stronger</em> proof than the HTTP-01 challenge because it<br>
+proves that you own the entire domain (including all sub-domains), instead<br>
+of just a single domain name. This means you can issue wildcard certificates<br>
 (eg, for <code>*.mydomain.com</code>).</p>
-<p>The beauty of this challenge type is that it doesn’t require your webserver 
-to be publicly accessible; instead you need to add a special record to a TXT 
+<p>The beauty of this challenge type is that it doesn’t require your webserver<br>
+to be publicly accessible; instead you need to add a special record to a TXT<br>
 entry on your DNS server to prove ownership.</p>
-<p>It’s no secret that this challenge type exists. It’s just rarer - perhaps 
-because it comes with the somewhat-significant downside of needing to store 
-API keys for your DNS provider on your webserver to allow <code>certbot</code> to 
-automate the challenge. Additionally, your DNS provider actually 
-needs to have API support for creating DNS records. Cloudflare is, once 
+<p>It’s no secret that this challenge type exists. It’s just rarer - perhaps<br>
+because it comes with the somewhat-significant downside of needing to store<br>
+API keys for your DNS provider on your webserver to allow <code>certbot</code> to<br>
+automate the challenge. Additionally, your DNS provider actually<br>
+needs to have API support for creating DNS records. Cloudflare is, once<br>
 again, fantastic on this front (and free for simple use cases like ours).</p>
-<p>Of course, because our webserver is local and not accessible to the internet,
-the attack surface is much reduced and keeping API credentials on the webserver 
+<p>Of course, because our webserver is local and not accessible to the internet,<br>
+the attack surface is much reduced and keeping API credentials on the webserver<br>
 probably isn’t a big deal.</p>
-<h2 id="Putting-it-all-together"><a href="#Putting-it-all-together" class="headerlink" title="Putting it all together"></a>Putting it all together</h2><p>Here’s the setup I ended up with:</p>
+<h2 id="Putting-it-all-together">Putting it all together</h2>
+<p>Here’s the setup I ended up with:</p>
 <ul>
-<li>DNS records that all resolve to the same local IP address on Cloudflare 
+<li>DNS records that all resolve to the same local IP address on Cloudflare<br>
 (because I haven’t gotten around to setting up a local DNS server yet)</li>
-<li>An <a target="_blank" rel="noopener" href="https://www.nginx.com/">nginx</a> reverse proxy at that IP, which looks 
+<li>An <a target="_blank" rel="noopener" href="https://www.nginx.com/">nginx</a> reverse proxy at that IP, which looks<br>
 at the <code>Host</code> header and forwards traffic to other local webservices</li>
-<li>Certbot set up alongside nginx to automate TLS certificate renewals using 
+<li>Certbot set up alongside nginx to automate TLS certificate renewals using<br>
 the DNS-01 challenge</li>
 </ul>
-<p>I’m running nginx in a <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> container because 
-it makes everything <em>so easy</em>. I even found an off-the-shelf container that 
+<p>I’m running nginx in a <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> container because<br>
+it makes everything <em>so easy</em>. I even found an off-the-shelf container that<br>
 already has nginx and certbot set up. Here’s the <code>docker compose</code> file:</p>
 <figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    <span class="comment"># https://github.com/JonasAlfredsson/docker-nginx-certbot</span></span><br><span class="line">    image: jonasal/nginx-certbot:<span class="number">5.0</span>.<span class="number">1</span></span><br><span class="line">    container_name: nginx</span><br><span class="line">    restart: <span class="string">&#x27;unless-stopped&#x27;</span></span><br><span class="line">    volumes:</span><br><span class="line">      <span class="comment"># The final certificates are stored here</span></span><br><span class="line">      <span class="comment"># You must also provide your DNS provider&#x27;s API key as a file here</span></span><br><span class="line">      <span class="comment"># See https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/master/docs/certbot_authenticators.md</span></span><br><span class="line">      - ./letsencrypt:/etc/letsencrypt</span><br><span class="line">      <span class="comment"># Makes it easy to configure nginx</span></span><br><span class="line">      - ./conf.d:/etc/nginx/conf.d</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;80:80&quot;</span></span><br><span class="line">      - <span class="string">&quot;443:443&quot;</span></span><br><span class="line">    environment:</span><br><span class="line">      - CERTBOT_EMAIL=&lt;your email&gt;</span><br><span class="line">      <span class="comment"># Tells cerbot to use DNS-01, specifically with Cloudflare</span></span><br><span class="line">      - CERTBOT_AUTHENTICATOR=dns-cloudflare</span><br></pre></td></tr></table></figure>
-
 <p>Here’s the <code>nginx</code> config:</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123; </span><br><span class="line">    <span class="comment"># Listen to port 443 on both IPv4 and IPv6. </span></span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl; </span><br><span class="line">    <span class="attribute">listen</span> [::]:<span class="number">443</span> ssl; </span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Domain names this server should respond to </span></span><br><span class="line">    <span class="attribute">server_name</span> subdomain.mydomain.com; <span class="comment"># certbot_domain:*.mydomain.com </span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Load the certificate files </span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>         /etc/letsencrypt/live/wildcard.mydomain.com.dns-cloudflare/fullchain.pem; </span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>     /etc/letsencrypt/live/wildcard.mydomain.com.dns-cloudflare/privkey.pem; </span><br><span class="line">    <span class="attribute">ssl_trusted_certificate</span> /etc/letsencrypt/live/wildcard.mydomain.com.dns-cloudflare/chain.pem; </span><br><span class="line"> </span><br><span class="line">    <span class="attribute">ssl_dhparam</span> /etc/letsencrypt/dhparams/dhparam.pem; </span><br><span class="line"> </span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   Upgrade <span class="variable">$http_upgrade</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   Connection <span class="variable">$http_connection</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   Host <span class="variable">$http_host</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   X-Real-IP <span class="variable">$remote_addr</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span>   X-Forwarded-Proto <span class="variable">$scheme</span>; </span><br><span class="line"> </span><br><span class="line">    <span class="section">location</span> / &#123; </span><br><span class="line">        <span class="attribute">proxy_pass</span> http://192.168.1.123:9876; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Note the special <code># certbot_domain:*.mydomain.com</code> comment. This is a hint 
-that the scripts in this particular Docker image understand, so that they’ll 
-ask certbot to use this domain and issue a wildcard certificate instead of 
-using the <code>server_name</code> and generating a certificate for each subdomain. See 
-the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/issues/130">issue</a>
-and the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/master/docs/advanced_usage.md#override-server_name">docs</a>
+<p>Note the special <code># certbot_domain:*.mydomain.com</code> comment. This is a hint<br>
+that the scripts in this particular Docker image understand, so that they’ll<br>
+ask certbot to use this domain and issue a wildcard certificate instead of<br>
+using the <code>server_name</code> and generating a certificate for each subdomain. See<br>
+the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/issues/130">issue</a><br>
+and the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/master/docs/advanced_usage.md#override-server_name">docs</a><br>
 and the <a target="_blank" rel="noopener" href="https://github.com/JonasAlfredsson/docker-nginx-certbot/blob/master/examples/example_server_overrides.conf">example</a>.</p>
-<p>The scripts actually automatically add those <code>ssl_*</code> directives. It’s pretty 
+<p>The scripts actually automatically add those <code>ssl_*</code> directives. It’s pretty<br>
 neat.</p>
-<p>After this simple config, you can now access <a target="_blank" rel="noopener" href="https://subdomain.mydomain.com/">https:&#x2F;&#x2F;subdomain.mydomain.com</a> 
+<p>After this simple config, you can now access <a target="_blank" rel="noopener" href="https://subdomain.mydomain.com">https://subdomain.mydomain.com</a><br>
 and everything works perfectly.</p>
 
   </div>
@@ -346,7 +351,7 @@ and everything works perfectly.</p>
     Copyright &copy;
     
     
-    2016-2024
+    2016-2025
     Leo Huang
   </div>
   <div class="footer-right">
