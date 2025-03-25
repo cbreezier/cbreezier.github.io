@@ -68,24 +68,49 @@ I considered and discarded the following options:
 - throwing basic auth on every page with a shared password
   - very annoying to use
   - can't revoke access to a single user
+- IP whitelisting
+  - transparently just works for people accessing the blog
+  - very annoying to set up
+  - between dynamic IPs, CGNAT, and cellular internet, it's impossible to keep
+    the whitelist up to date. I had a friend whose IPV6 address kept changing!
 
-## IP whitelisting
+I actually tried the IP whitelisting for a fair while, but it ended up just
+being untenable.
 
-I ended up on the idea of simply whitelisting IP addresses that could access 
-the personal blog. I would self-host the blog on my home server, and 
-configure the IP whitelist on my nginx reverse proxy. This has _numerous_ 
-disadvantages:
+## Cookie-based shared secret at the load balancer
 
-- uptime of my home server is almost certainly worse than Blogger (but who 
-  cares)
-- updating the whitelist is a bit annoying (but really not that bad)
-- people with dynamic IPV4 addresses (read: everyone) could change IPs
-- people on CGNAT would mean that their entire cohort sharing the same 
-  public IP could technically access my blog (but who cares - the scrapers 
-  certainly can't)
-- I can't just share the blog out with a single link - I have to actually 
-  get their IP address
+The idea is very simple:
+1. share a link with a shared secret embedded in it
+2. upon visiting the link, write the shared secret to a cookie
+3. validate the cookie on each subsequent visit
 
-But ultimately, none of these were deal-breakers to me for my particular use 
-case.
+The best part is, all of this can be done at the load balancer/reverse proxy 
+(eg, nginx) so it's completely agnostic to the tech stack of the website 
+you're trying to protect.
 
+Here's what it looks like in practice:
+
+```nginx
+server {
+    server_name your.domain;
+
+    # /auth/ endpoint is public access, and will set a cookie from a query param
+    location /auth {
+        add_header Set-Cookie "authToken=${arg_token};Path=/;Max-Age=31536000";
+        return 302 /;
+    }
+
+    location / {
+        if ($cookie_authToken != 'your-long-shared-secret') {
+            return 403;
+        }
+        # Refresh the cookie
+        add_header Set-Cookie "authToken=${cookie_authToken};Path=/;Max-Age=31536000";
+        alias /var/www/static/blog/;
+    }
+}
+```
+
+Then you simply share a link that looks like 
+https://your.domain/auth?token=your-long-shared-secret
+and everything Just Works™.
