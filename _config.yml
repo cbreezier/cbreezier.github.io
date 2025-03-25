@@ -95,29 +95,9 @@ exclude:
 ignore:
 
 # Rendering
-marked:
-  gfm: false
-  pedantic: false
-  breaks: false
-  smartLists: true
-  smartypants: true
-  quotes: '“”‘’'
-  modifyAnchors: 0
-  anchorAlias: false
-  autolink: true
-  mangle: true
-  sanitizeUrl: false
-  dompurify: false
-  headerIds: true
-  lazyload: false
-  prependRoot: true
-  postAsset: true
-  external_link:
-    enable: false
-    exclude: [ ]
-    nofollow: false
-  disableNunjucks: false
-  descriptionLists: true
+markdown:
+  plugins:
+    - markdown-it-footnote
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
@@ -130,6 +110,8 @@ theme_config:
     Home: /
     About: /about/
     Blog: /archives/
+  posts_overview:
+    show_all_posts: true
   social_links:
     github: https://github.com/cbreezier
     linkedin: https://www.linkedin.com/in/leo-huang-7612b417a/
