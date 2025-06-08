@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Computers are not smart. In fact, they are extraordinarily dumb, only able to process the simplest of logic and manipulate data in basic ways. Nor are computers logical. They may be able to evaluate s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLMs are an impressive dead end">
+<meta property="og:url" content="https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/">
+<meta property="og:site_name" content="A blog">
+<meta property="og:description" content="Computers are not smart. In fact, they are extraordinarily dumb, only able to process the simplest of logic and manipulate data in basic ways. Nor are computers logical. They may be able to evaluate s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://imgs.xkcd.com/comics/tasks.png">
+<meta property="og:image" content="https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/go-ai-board-evaluation.png">
+<meta property="article:published_time" content="2025-06-08T11:26:47.000Z">
+<meta property="article:modified_time" content="2025-06-08T11:36:37.895Z">
+<meta property="article:author" content="Leo Huang">
+<meta property="article:tag" content="ai">
+<meta property="article:tag" content="thoughts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgs.xkcd.com/comics/tasks.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>LLMs are an impressive dead end</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/03/25/Chinese-wisdom-four-words/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&text=LLMs are an impressive dead end"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&is_video=false&description=LLMs are an impressive dead end"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LLMs are an impressive dead end&body=Check out this article: https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&name=LLMs are an impressive dead end&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&t=LLMs are an impressive dead end"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-holy-grail-of-Intuition"><span class="toc-number">1.</span> <span class="toc-text">The holy grail of Intuition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Artificial-neural-networks"><span class="toc-number">1.1.</span> <span class="toc-text">Artificial neural networks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intuition-is-%E2%80%9Csolved%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">Intuition is “solved”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intuition-alone-is-not-enough"><span class="toc-number">3.</span> <span class="toc-text">Intuition alone is not enough</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-study-AlphaGo"><span class="toc-number">3.1.</span> <span class="toc-text">Case study: AlphaGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-data-problem"><span class="toc-number">3.2.</span> <span class="toc-text">The data problem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reasoning-models"><span class="toc-number">3.3.</span> <span class="toc-text">Reasoning models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#World-models"><span class="toc-number">3.4.</span> <span class="toc-text">World models</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Understanding-the-limitations-of-LLMs"><span class="toc-number">4.</span> <span class="toc-text">Understanding the limitations of LLMs</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        LLMs are an impressive dead end
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leo Huang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-08T11:26:47.000Z" itemprop="datePublished">2025-06-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ai/" rel="tag">ai</a>, <a class="tag-link-link" href="/tags/thoughts/" rel="tag">thoughts</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Computers are not smart. In fact, they are extraordinarily dumb, only able to<br>
+process<br>
+the simplest of logic and manipulate data in basic ways.</p>
+<p>Nor are computers logical. They may be able to evaluate simple boolean logic<br>
+and follow preset algorithms faithfully and deterministically, but it would<br>
+be misleading to imply that they possess any logic or reasoning capabilities<br>
+of their own.</p>
+<p>However, they are <em>fast</em>. It turns out that being able to do dumb things<br>
+very fast can produce some startlingly powerful results.</p>
+<p>In 1996 IBM unveiled Deep Blue against reigning chess world champion Garry<br>
+Kasparov. Deep Blue boasts an impressive set of statistics: 11 years of<br>
+development, able to evaluate 200 million positions per second, and cost<br>
+around $10 million dollars to create.</p>
+<p>Deep Blue pushed classical computing algorithms to the limit, using<br>
+specialised hardware, fine-tuned heuristics and rules for every part of the<br>
+game, and large endgame databases.</p>
+<p>It was able to beat Garry Kasparov in 1997, but you’d be hard-pressed to<br>
+find a computer scientist or chess professional who would consider it to be<br>
+intelligent, or truly capable of logic and reasoning.</p>
+<h2 id="The-holy-grail-of-Intuition">The holy grail of Intuition</h2>
+<p>The development of Deep Blue involved a lot of hardcoded rules from chess professionals. In essence, humans condensed their<br>
+<em>intuition</em> into heuristics that could be used to optimise the dumb,<br>
+brute-force tree search of chess positions.</p>
+<p>A decade ago, it was almost unthinkable that a piece of software could<br>
+possess any kind of intuition of its own. After all, intuition is a vague,<br>
+hand-wavy, and distinctly human concept compared to the cold hard “logic” of<br>
+algorithms of that time.</p>
+<p><img src="https://imgs.xkcd.com/comics/tasks.png" alt="XKCD Tasks"></p>
+<p>While computers could calculate the multiplication of two 10-digit numbers<br>
+in an eye-blink, simple human tasks like recognising words in an image or<br>
+writing naturally were far out of reach. Any task that a human could do<br>
+intuitively was a virtual impossibility for computers.</p>
+<h3 id="Artificial-neural-networks">Artificial neural networks</h3>
+<p>Fast-forward to the 2010s and artificial neural networks were becoming<br>
+increasingly powerful. The search for the holy grail of AI had set it sights<br>
+on developing human-like intuition using artificial machine learning models.</p>
+<p>AlexNet, a Convolutional Neural Network developed in 2012, marked a turning<br>
+point in machine image recognition.</p>
+<p>Generative Adversarial Networks (GANs) in 2014 enabled the generation of<br>
+realistic images, videos, and music.</p>
+<p>And of course, Large Language Models (LLMs) such as GPT-3 in 2020 set the<br>
+world aflame with its ability to produce realistic, human-like text.</p>
+<h2 id="Intuition-is-“solved”">Intuition is “solved”</h2>
+<p>If Deep Blue was pure brute-force logic, then modern deep neural networks are<br>
+unadulterated and distilled intuition.</p>
+<p>LLMs have condensed mind-bogglingly vast amounts of data into a model that<br>
+can <em>intuitively</em> spit out text that makes a lot of sense.</p>
+<p>Imagine trying to intuitively answer complex questions like 3,618,392<br>
+divided by 25,832. No, don’t even try to do any approximate mathematical<br>
+calculations - just <em>intuit</em> it.</p>
+<p>Did you get close? I didn’t - I panicked and came up with 200. I put it<br>
+through Hermes llama2 13B and it gave me 140.74, which is incredibly close<br>
+to the true answer of 140.07.</p>
+<p>Modern LLMs are genuinely impressive. If Deep Blue pushed the boundaries of<br>
+classical computing algorithms and hard-coded logic, then LLMs have surely<br>
+punched far above their weight in terms of achieving results through pure<br>
+intuition.</p>
+<h2 id="Intuition-alone-is-not-enough">Intuition alone is not enough</h2>
+<p>So many impressive feats have been achieved by this intuition alone - surely<br>
+if we just created even <em>more</em> powerful intuition, all the problems with<br>
+LLMs could be solved?</p>
+<p>To intuit something, you must understand the subject matter in a deep,<br>
+subconscious way.</p>
+<p>In order to simply <em>know</em> the answer to increasingly complex and <em>general</em><br>
+problems, we would need to create a being that is virtually omnipotent.</p>
+<p>Since LLMs are trained on human data, <strong>we would essentially need to create<br>
+God in man’s image.</strong></p>
+<p>Not only does that sound blasphemous (no, I’m not religious), it’s likely an<br>
+impossibility.</p>
+<p>Without literal God-level intuition, it can never be a<br>
+replacement for slowly reasoning through complex problems with logic.<br>
+Intuition can only ever be an <em>optimisation</em> to guide where we apply our logic.</p>
+<h3 id="Case-study-AlphaGo">Case study: AlphaGo</h3>
+<p>While Deep Blue made an impressive mark on the world of chess, the game of<br>
+Go has far more possible positions. Even years after chess engines could<br>
+reliably beat the strongest human players, Go seemed to be untouchable due<br>
+to how resistant it was to brute-force algorithms.</p>
+<p>Everything changed with AlphaGo, a system that combined superhuman<br>
+<strong>intuition</strong> from deep neural nets with superhuman <strong>logic</strong> from its<br>
+deep calculations with its Monte Carlo Tree Search (MCTS).</p>
+<p>A quick primer on MCTS - instead of brute-forcing every possible sequence of<br>
+moves (impossible), MCTS involves playing a <strong>single</strong> sequence of moves out<br>
+to the end of the game by picking random valid moves at each point, then recording<br>
+the result. Do this a few thousand times, and you start to build a<br>
+probability distribution of “how many times did I win after I played this<br>
+particular move?”.</p>
+<p>You can think of it as a probabilistic, sampled DFS, compared to the<br>
+traditional brute-force of a 12-move-deep BFS followed by a heuristical evaluation<br>
+of the board.</p>
+<p>Of course, playing truly random moves doesn’t give you a very good set of<br>
+samples or a very good probability distribution, since you’re sampling such<br>
+a small portion of the full state space.</p>
+<p>Here’s how AlphaGo works:</p>
+<ol>
+<li>Given any board state, <em>intuit</em> the likely best moves on the board.</li>
+<li>Start a MCTS, where the random move selection is more heavily weighted<br>
+towards the better moves.</li>
+<li>Use the results of the MCTS to improve your intuition of which moves<br>
+might be best.</li>
+</ol>
+<p>The deep neural network (intuition) guides the MCTS (logic), and the MCTS<br>
+improves the deep neural network (learning).</p>
+<p>It’s remarkably elegant from a high level perspective, and remarkably human.<br>
+We play the game in a similar way - we prioritise calculating lines of play<br>
+that involve likely moves based on our intuition.</p>
+<p><img src="go-ai-board-evaluation.png" alt="AlphaGo intuits good moves"><br>
+<x-caption><br>
+An AI model highlights the moves (black to play) that it believes are best.<br>
+The number represents the change in winning probability after playing the move.<br>
+</x-caption><br>
+<x-caption><br>
+One very interesting tidbit about AlphaGo is that it actually encodes the<br>
+board state as an <em>image</em> for its deep neural network.<br>
+</x-caption></p>
+<p>AlphaGo beats Lee Sedol, a top Go player, in a decisive 4-1 victory in 2016.</p>
+<p>Lee Sedol retires a few years later, citing that “AI is an entity that<br>
+cannot be defeated”.</p>
+<p>The key reason why AlphaGo was so successful was that it was able to<br>
+accurately apply logic to validate its intuition. This, in turn, is entirely<br>
+due to being able to perfectly model the rules of Go in software.</p>
+<p>Let me repeat that: <strong>in the narrow domain of Go, we are able to perfectly<br>
+model the rules of Go for an algorithm to logically reason about.</strong></p>
+<h3 id="The-data-problem">The data problem</h3>
+<p>Intuition is build from experience. For a machine, that means data.</p>
+<p>It’s no secret that we’ve already run out of data for LLMs to crunch on and<br>
+learn from. The entirety of the internet, decades of published books,<br>
+copyright be damned, have been sucked up and compressed into increasingly<br>
+powerful models of intuition.</p>
+<p>Even so, they are far from perfect. LLMs constantly hallucinate and approximate.</p>
+<p>Where can we possibly get more data from?</p>
+<p>AlphaGo was trained from vast databases of professional human games. After<br>
+it defeated Lee Sedol, a new version called AlphaZero was developed.</p>
+<p>AlphaZero didn’t use any human data at all. It started with zero intuition<br>
+and just played random moves against itself for hundreds of thousands of games.<br>
+Eventually, it built up enough intuition to actually surpass the original<br>
+AlphaGo. Unbounded by human biases and mistakes, it found new moves that<br>
+humans had rarely considered before.</p>
+<p>Can we use synthetic data generated by LLMs to further train LLMs?</p>
+<p>In short: no. Where AlphaZero generated new data from <em>ground truths</em><br>
+by simply playing by the rules of Go, synthetic data amplifies biases in<br>
+existing data without bringing in anything new.</p>
+<p>So even if it were possible to build truly god-like intuition and skip the<br>
+need for logic at all, it’s simply not practically feasible, and we’re<br>
+already pushing the limits.</p>
+<h3 id="Reasoning-models">Reasoning models</h3>
+<p>What about recent developments in so-called “reasoning models”? These models<br>
+are able to generate Chains of Thought that seem to approximate reasoning as<br>
+a supplement to their intuition.</p>
+<p>Unfortunately, that’s all they are - an approximation of reasoning. While<br>
+they try and break down a task into smaller logical steps, each step is<br>
+still being evaluated with intuition rather than logic.</p>
+<p>We may see greater fidelity and a better ability to stay on track through a<br>
+complex problem, but the fundamental building blocks are still intuition<br>
+without a drop of true reasoning.</p>
+<p>Until we can perfectly model the real world for a machine to explore and<br>
+learn from, LLMs and “reasoning” are as different as oil and water.</p>
+<h3 id="World-models">World models</h3>
+<p>There have been recent news articles about various startups / research labs<br>
+that are trying to encode world models into their AI models.</p>
+<p>Just like how AlphaGo had an accurate understanding of the rules of Go, an AI<br>
+model with an accurate understanding of the “rules” of the world should be<br>
+able to truly “reason” about things, rather than rely purely on intuition.</p>
+<p>It actually sounds like a promising direction, except that the real world is<br>
+infinitely more complex than a game of Go.</p>
+<p>Artificial <strong>General</strong> Intelligence needs to be able to understand anything<br>
+and everything about the real world. In order to arrive at the<br>
+analogue for AlphaZero, we would need the ability to <em>simulate real life</em>.</p>
+<p>Now that’s truly the realm of science fiction.</p>
+<p>LLMs were a revolutionary breakthrough. It would take an even larger,<br>
+different breakthrough for us to truly achieve AGI.</p>
+<h2 id="Understanding-the-limitations-of-LLMs">Understanding the limitations of LLMs</h2>
+<p>We need to recognise LLMs for what they are. Although the stated goal is AGI<br>
+(Artificial General Intelligence), <strong>at best we have created Artificial<br>
+General Intuition</strong>.</p>
+<p>Treat an LLM like a Rain Man level savant with incredible breadth of<br>
+knowledge, except they always say the first thing that comes to mind without<br>
+any form of critical thinking.</p>
+<p>An LLM may provide inspiration, or inject creativity, or provide great leads<br>
+on solving a problem. But they can never be trusted to verify their work<br>
+with watertight logic.</p>
+<p>In an ironic twist, modern day “AI” has become exceptionally good<br>
+at all the things we traditionally assign as human qualities (intuition,<br>
+creativity), but they fall<br>
+disappointingly short in areas where computers have traditionally excelled<br>
+(logic, determinism).</p>
+<p>Will we see AGI achieved by LLMs in the next 5-10 years? Judging by the<br>
+rapid advancements, stunningly large cash investments, and the un-shakeable<br>
+hype train, you would be forgiven for intuitively thinking that AGI is just<br>
+around the corner.</p>
+<p>But apply some logic and reasoning, and it’s clear that LLMs can only be an<br>
+impressive dead end.</p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-holy-grail-of-Intuition"><span class="toc-number">1.</span> <span class="toc-text">The holy grail of Intuition</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Artificial-neural-networks"><span class="toc-number">1.1.</span> <span class="toc-text">Artificial neural networks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intuition-is-%E2%80%9Csolved%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">Intuition is “solved”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intuition-alone-is-not-enough"><span class="toc-number">3.</span> <span class="toc-text">Intuition alone is not enough</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-study-AlphaGo"><span class="toc-number">3.1.</span> <span class="toc-text">Case study: AlphaGo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-data-problem"><span class="toc-number">3.2.</span> <span class="toc-text">The data problem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reasoning-models"><span class="toc-number">3.3.</span> <span class="toc-text">Reasoning models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#World-models"><span class="toc-number">3.4.</span> <span class="toc-text">World models</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Understanding-the-limitations-of-LLMs"><span class="toc-number">4.</span> <span class="toc-text">Understanding the limitations of LLMs</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&text=LLMs are an impressive dead end"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&is_video=false&description=LLMs are an impressive dead end"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LLMs are an impressive dead end&body=Check out this article: https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&title=LLMs are an impressive dead end"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&name=LLMs are an impressive dead end&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/06/08/LLMs-are-an-impressive-dead-end/&t=LLMs are an impressive dead end"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Leo Huang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'cbreezier/cbreezier.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'utterances';
+      var utterances_theme = 'photon-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

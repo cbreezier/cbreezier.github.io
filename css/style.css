@@ -1661,3 +1661,10 @@ code {
 .highlight .line {
   height: 22px;
 }
+x-caption {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  margin-top: -32px;
+  margin-bottom: 20px;
+}
