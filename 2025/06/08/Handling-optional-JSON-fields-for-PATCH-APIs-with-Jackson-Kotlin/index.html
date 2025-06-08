@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="When HTTP&#x2F;1.0 was first proposed in 1996, it defined only 3 methods in RFC 1945: GET, HEAD, and POST. Then RFC 2616 introduces many other methods including PUT and DELETE in 1999. But it’s not until 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handling optional JSON fields for PATCH APIs with Jackson&#x2F;Kotlin">
+<meta property="og:url" content="https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/">
+<meta property="og:site_name" content="A blog">
+<meta property="og:description" content="When HTTP&#x2F;1.0 was first proposed in 1996, it defined only 3 methods in RFC 1945: GET, HEAD, and POST. Then RFC 2616 introduces many other methods including PUT and DELETE in 1999. But it’s not until 2">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-08T12:36:31.000Z">
+<meta property="article:modified_time" content="2025-06-08T12:36:31.186Z">
+<meta property="article:author" content="Leo Huang">
+<meta property="article:tag" content="programming">
+<meta property="article:tag" content="kotlin">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Handling optional JSON fields for PATCH APIs with Jackson/Kotlin</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/06/08/LLMs-are-an-impressive-dead-end/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&text=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&is_video=false&description=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin&body=Check out this article: https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&name=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&t=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-PATCH-method"><span class="toc-number">1.</span> <span class="toc-text">The PATCH method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-the-black-sheep"><span class="toc-number">2.</span> <span class="toc-text">undefined: the black sheep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-PATCH-APIs-with-Jackson-Kotlin"><span class="toc-number">3.</span> <span class="toc-text">Implementing PATCH APIs with Jackson &#x2F; Kotlin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-1-Optional-T"><span class="toc-number">3.1.</span> <span class="toc-text">Level 1: Optional&lt;T&gt;?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-2-custom-OptionalField-T"><span class="toc-number">3.2.</span> <span class="toc-text">Level 2: custom OptionalField&lt;T?&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-3-Use-jackson-databind-nullable"><span class="toc-number">3.3.</span> <span class="toc-text">Level 3: Use jackson-databind-nullable</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Handling optional JSON fields for PATCH APIs with Jackson/Kotlin
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leo Huang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-08T12:36:31.000Z" itemprop="datePublished">2025-06-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/kotlin/" rel="tag">kotlin</a>, <a class="tag-link-link" href="/tags/programming/" rel="tag">programming</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>When HTTP/1.0 was first proposed in 1996, it defined only 3 methods in <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc1945#section-5.1.1">RFC<br>
+1945</a>: <code>GET</code>,<br>
+<code>HEAD</code>, and <code>POST</code>.</p>
+<p>Then <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc2616#section-5.1.1">RFC 2616</a><br>
+introduces many other methods including <code>PUT</code> and <code>DELETE</code> in 1999.</p>
+<p>But it’s not until 2010 that<br>
+<a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc5789">RFC 5789</a> finally introduces<br>
+the <code>PATCH</code> method.</p>
+<p>Perhaps that’s why it’s often forgotten and rarely discussed.</p>
+<h2 id="The-PATCH-method">The <code>PATCH</code> method</h2>
+<blockquote>
+<p>The existing<br>
+HTTP PUT method only allows a complete replacement of a document.<br>
+This proposal adds a new HTTP method, PATCH, to modify an existing<br>
+HTTP resource.</p>
+<p><em><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc5789">RFC 5789</a></em></p>
+</blockquote>
+<p>This method is really quite useful, and I would go so far as to say that the<br>
+majority of REST-y CRUD-y “update” operations should use <code>PATCH</code> rather than<br>
+<code>PUT</code>. It allows us to:</p>
+<ul>
+<li>save on bandwidth by only submitting fields that change</li>
+<li>minimise race conditions where the last updater wins (imagine a resource<br>
+with 1000 fields, but you only want to change 1 of them - using <code>PUT</code> you<br>
+essentially “lock” out and introduce race conditions on all 1000 fields)</li>
+</ul>
+<p>There are multiple ways to implement a <code>PATCH</code> API - indeed, RFC 5789<br>
+doesn’t really specify an implementation.</p>
+<p>In the JSON world, there are two main ways:</p>
+<ul>
+<li>JSON Merge Patch (<a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc7396">RFC 7396</a>)</li>
+<li>JSON Patch (<a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc6902">RFC 6902</a>)</li>
+</ul>
+<p>If we have a resource that looks like this:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;John Doe&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;+61444555666&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>and we want to modify just the name to “Johnny Doe”, then a <code>PUT</code> API might<br>
+look like:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Johnny Doe&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;+61444555666&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>a JSON Merge Patch would look like:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Johnny Doe&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>and a JSON Patch would look like:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;op&quot;</span><span class="punctuation">:</span> <span class="string">&quot;replace&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/name&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Johnny Doe&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>We’re going to focus on JSON Merge Patch, since it’s the simplest, and<br>
+sufficient in most cases.</p>
+<h2 id="undefined-the-black-sheep"><code>undefined</code>: the black sheep</h2>
+<p>People love to hate on <code>undefined</code> vs <code>null</code> in JavaScript. Honestly though,<br>
+I’ve never had an issue with it. Even though they may be often<br>
+interchangeable, they clearly represent two semantically different concepts.</p>
+<p>And nowhere is it clearer than with a JSON Merge Patch request.</p>
+<p>Everything is simpler when all the fields in your resource are non-nullable,<br>
+but when <code>null</code> is a valid value for your field, you need to clearly<br>
+disambiguate between 3 states:</p>
+<ol>
+<li>I want to update the <code>&quot;name&quot;</code> field (use a <code>string</code>)</li>
+<li>I want to update the <code>&quot;name&quot;</code> field to null (use <code>null</code>)</li>
+<li>I don’t want to update the <code>&quot;name&quot;</code> field (omit the field entirely, ie<br>
+<code>undefined</code> semantics)</li>
+</ol>
+<h2 id="Implementing-PATCH-APIs-with-Jackson-Kotlin">Implementing <code>PATCH</code> APIs with Jackson / Kotlin</h2>
+<p>Unfortunately, it’s not exactly easy to properly disambiguate between<br>
+“missing field” and “null field” when deserializing with Jackson (or perhaps<br>
+with any popular library - it certainly seems difficult with <code>kotlinx. serialization</code> too).</p>
+<h3 id="Level-1-Optional-T">Level 1: <code>Optional&lt;T&gt;?</code></h3>
+<p>There’s actually a workable solution out of the box: a nullable optional field.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">UserPatch</span>(</span><br><span class="line">  <span class="keyword">val</span> name: Optional&lt;String&gt;?,</span><br><span class="line">  <span class="keyword">val</span> phone: String?,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Note that <code>java.util.Optional</code> does not allow containing <code>null</code> values, so<br>
+<code>Optional&lt;String?&gt;</code> isn’t an option.</p>
+<p>Out of the box, this nullable optional field does kind of work:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Value</th>
+<th>Null</th>
+<th>Undefined</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Json</td>
+<td><code>&quot;name&quot;: &quot;value&quot;</code></td>
+<td><code>&quot;name&quot;: null</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Kotlin</td>
+<td><code>Optional.of(value)</code></td>
+<td><code>Optional.empty()</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>Serialized</td>
+<td><code>&quot;name&quot;: &quot;value&quot;</code></td>
+<td><code>&quot;name&quot;: null</code></td>
+<td><code>&quot;name&quot;: null</code> ❌</td>
+</tr>
+</tbody>
+</table>
+<p>When deserializing (the important part as a webserver), we are correctly<br>
+able to disambiguate between the three states. However:</p>
+<ul>
+<li>it is <em>really</em> confusing that <code>null</code> means <code>undefined</code></li>
+<li>when serializing, we still get <code>null</code> written out for the <code>undefined</code><br>
+case, unless we ass an annotation like <code>@JsonInclude(Include.NON_NULL)</code><br>
+on the field</li>
+</ul>
+<h3 id="Level-2-custom-OptionalField-T">Level 2: custom <code>OptionalField&lt;T?&gt;</code></h3>
+<p>We can define our own class that <em>does</em> allow containing <code>null</code> values, and<br>
+this gives it all the right semantics.</p>
+<p>Here’s what my implementation looks like:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A class specifically intended to be used as a field in a JSON-serializable object.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * It can represent 3 cases:</span></span><br><span class="line"><span class="comment"> *  - a present value</span></span><br><span class="line"><span class="comment"> *  - a null value</span></span><br><span class="line"><span class="comment"> *  - an undefined value (field absent from the json entirely)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title class_">OptionalField</span>&lt;<span class="type">out T</span>&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Such a nice API. Why doens&#x27;t java.util.Optional implement this?</span></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;R&gt;</span> <span class="title">fold</span><span class="params">(ifPresent: (<span class="type">T</span>) -&gt; <span class="type">R</span>, ifUndefined: () -&gt; <span class="type">R</span>)</span></span>: R</span><br><span class="line"></span><br><span class="line">    <span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Present</span>&lt;<span class="type">T</span>&gt;(</span><br><span class="line">        <span class="comment">// This means that this field should be used directly for ser/deser,</span></span><br><span class="line">        <span class="comment">// rather than serializing this class as an object containing the value</span></span><br><span class="line">        <span class="meta">@JsonValue</span></span><br><span class="line">        <span class="keyword">val</span> value: T,</span><br><span class="line">    ): OptionalField&lt;T&gt;() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;R&gt;</span> <span class="title">fold</span><span class="params">(ifPresent: (<span class="type">T</span>) -&gt; <span class="type">R</span>, ifUndefined: () -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">            <span class="keyword">return</span> ifPresent(value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">data</span> <span class="keyword">object</span> Undefined: OptionalField&lt;<span class="built_in">Nothing</span>&gt;() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;R&gt;</span> <span class="title">fold</span><span class="params">(ifPresent: (<span class="type">Nothing</span>) -&gt; <span class="type">R</span>, ifUndefined: () -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">            <span class="keyword">return</span> ifUndefined()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>And this is what it looks like to use:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Value</th>
+<th>Null</th>
+<th>Undefined</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Json</td>
+<td><code>&quot;name&quot;: &quot;value&quot;</code></td>
+<td><code>&quot;name&quot;: null</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Kotlin</td>
+<td><code>OptionalField.Present(value)</code></td>
+<td><code>null</code></td>
+<td><code>OptionalField.Undefined</code></td>
+</tr>
+<tr>
+<td>Serialized</td>
+<td><code>&quot;name&quot;: &quot;value&quot;</code></td>
+<td><code>&quot;name&quot;: null</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Perfect</strong>.</p>
+<p>Except, of course, it’s not that easy. Usually, writing custom serializers<br>
+and deserializers for Jackson is pretty painless. However, when you want to<br>
+change the behaviour of a serializer to <em>omit a field entirely</em>, you end up<br>
+having to dive pretty deep into Jackson internals.</p>
+<p>With a normal custom serializer, Jackson doesn’t invoke your serializer<br>
+until it’s already written <code>&quot;name&quot;:</code>.</p>
+<p>So we need to jump in earlier, using a different technique. I won’t bore<br>
+you with the 4+ hour journey of cross-referencing ChatGPT hallucinations<br>
+against documentation and ample testing, and just show you the final code.</p>
+<p>Everything required for <strong>serialization</strong>:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.core.JsonGenerator</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.BeanDescription</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.SerializationConfig</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.SerializerProvider</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ser.BeanPropertyWriter</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ser.BeanSerializerModifier</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is the entirety of the magic for serializing our optional field.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * We need to modify the serialization _before_ we even get to the value if we want to omit</span></span><br><span class="line"><span class="comment"> * the entire field (including the key name).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * That&#x27;s what we&#x27;re doing here - replacing the default property writer with one that knows to</span></span><br><span class="line"><span class="comment"> * omit the entire field if we have an undefined value.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Note that we don&#x27;t actually need a custom serializer for [OptionalField] </span></span><br><span class="line"><span class="comment"> * itself.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">object</span> OptionalFieldBeanSerializerModifier: BeanSerializerModifier() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">changeProperties</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        config: <span class="type">SerializationConfig</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        beanDesc: <span class="type">BeanDescription</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        beanProperties: <span class="type">MutableList</span>&lt;<span class="type">BeanPropertyWriter</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: MutableList&lt;BeanPropertyWriter&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> beanProperties.map &#123;</span><br><span class="line">            <span class="keyword">val</span> type = it.type</span><br><span class="line">            <span class="comment">// This check may not even be strictly necessary - our custom property writer only</span></span><br><span class="line">            <span class="comment">// affects our special undefined value anyway</span></span><br><span class="line">            <span class="keyword">if</span> (OptionalField::<span class="keyword">class</span>.java.isAssignableFrom(type.rawClass)) &#123;</span><br><span class="line">                OptionalFieldWriter(it)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                it</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.toMutableList()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OptionalFieldWriter</span>(</span><br><span class="line">    delegate: BeanPropertyWriter,</span><br><span class="line">): BeanPropertyWriter(delegate) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">serializeAsField</span><span class="params">(bean: <span class="type">Any</span>?, gen: <span class="type">JsonGenerator</span>?, prov: <span class="type">SerializerProvider</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> value = <span class="keyword">this</span>.<span class="keyword">get</span>(bean)</span><br><span class="line">        <span class="keyword">if</span> (value <span class="keyword">is</span> OptionalField.Undefined) &#123;</span><br><span class="line">            <span class="comment">// Omit serializing this field</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">super</span>.serializeAsField(bean, gen, prov)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Everything required for <strong>deserialization</strong>:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.*</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.deser.Deserializers</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.deser.std.ReferenceTypeDeserializer</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.jsontype.TypeDeserializer</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.type.*</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Type</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This is the bulk of the deserialization magic.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * A [ReferenceType] is a type that is a reference to a single other value (like our [OptionalField] type). Other special</span></span><br><span class="line"><span class="comment"> * types include [CollectionType] and [MapType].</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * There&#x27;s some very convenient methods here such as [getAbsentValue] that allow us to control how we deal with missing</span></span><br><span class="line"><span class="comment"> * fields vs null fields.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">OptionalFieldDeserializer</span>&lt;<span class="type">T</span>&gt;(</span><br><span class="line">    fullType: JavaType,</span><br><span class="line">    valueDeserializer: JsonDeserializer&lt;*&gt;?,</span><br><span class="line">    typeDeserializer: TypeDeserializer?,</span><br><span class="line">): ReferenceTypeDeserializer&lt;OptionalField&lt;T&gt;&gt;(fullType, <span class="literal">null</span>, typeDeserializer, valueDeserializer) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getNullValue</span><span class="params">(ctxt: <span class="type">DeserializationContext</span>)</span></span>: OptionalField&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> OptionalField.Present(<span class="literal">null</span> <span class="keyword">as</span> T)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getAbsentValue</span><span class="params">(ctxt: <span class="type">DeserializationContext</span>)</span></span>: OptionalField&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> OptionalField.Undefined</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">referenceValue</span><span class="params">(contents: <span class="type">Any</span>)</span></span>: OptionalField&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> OptionalField.Present(contents <span class="keyword">as</span> T)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getReferenced</span><span class="params">(reference: <span class="type">OptionalField</span>&lt;<span class="type">T</span>&gt;)</span></span>: T? &#123;</span><br><span class="line">        <span class="keyword">return</span> reference.fold(</span><br><span class="line">            &#123; it &#125;,</span><br><span class="line">            &#123; <span class="literal">null</span> &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">updateReference</span><span class="params">(reference: <span class="type">OptionalField</span>&lt;<span class="type">T</span>&gt;, contents: <span class="type">Any</span>)</span></span>: OptionalField&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> OptionalField.Present(contents <span class="keyword">as</span> T)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Allows us to modify our deserializer for a different referenced type.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">withResolved</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        typeDeser: <span class="type">TypeDeserializer</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">        valueDeser: <span class="type">JsonDeserializer</span>&lt;*&gt;?,</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: ReferenceTypeDeserializer&lt;OptionalField&lt;T&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> OptionalFieldDeserializer&lt;T&gt;(</span><br><span class="line">            _fullType,</span><br><span class="line">            valueDeser,</span><br><span class="line">            typeDeser,</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Because our [OptionalField] type is generic, we need to construct our deserializer in context of</span></span><br><span class="line"><span class="comment"> * the parameterized type that we&#x27;re actually deserializing. That&#x27;s what this does - helps us find the right</span></span><br><span class="line"><span class="comment"> * deserializer for the right container ([OptionalField]) with the right content type defined.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">object</span> OptionalFieldDeserializers: Deserializers.Base() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">findReferenceDeserializer</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        refType: <span class="type">ReferenceType</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        config: <span class="type">DeserializationConfig</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        beanDesc: <span class="type">BeanDescription</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        contentTypeDeserializer: <span class="type">TypeDeserializer</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">        contentDeserializer: <span class="type">JsonDeserializer</span>&lt;*&gt;?,</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: JsonDeserializer&lt;*&gt;? &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">if</span> (OptionalField::<span class="keyword">class</span>.java.isAssignableFrom(refType.rawClass)) &#123;</span><br><span class="line">            OptionalFieldDeserializer&lt;Any&gt;(refType, contentDeserializer, contentTypeDeserializer)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * We need to tell Jackson that our [OptionalField] type is a [ReferenceType], or it won&#x27;t even try and</span></span><br><span class="line"><span class="comment"> * invoke our [OptionalFieldDeserializers.findReferenceDeserializer].</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This type modifier promotes any simple [OptionalField] types into a known [ReferenceType].</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">object</span> OptionalFieldTypeModifier: TypeModifier() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">modifyType</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        type: <span class="type">JavaType</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        jdkType: <span class="type">Type</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        context: <span class="type">TypeBindings</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        typeFactory: <span class="type">TypeFactory</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: JavaType &#123;</span><br><span class="line">        <span class="comment">// Make sure we don&#x27;t try and promote again after it&#x27;s already known to be a ReferenceType</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">if</span> (type.rawClass == OptionalField::<span class="keyword">class</span>.java &amp;&amp; type <span class="keyword">is</span> SimpleType &amp;&amp; type.containedTypeCount() == <span class="number">1</span>) &#123;</span><br><span class="line">            ReferenceType.upgradeFrom(type, type.containedType(<span class="number">0</span>))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Finally, how to hook it all up as a Jackson module:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.module.SimpleModule</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> OptionalFieldModule: SimpleModule() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setupModule</span><span class="params">(context: <span class="type">SetupContext</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.setupModule(context)</span><br><span class="line">        context.addTypeModifier(OptionalFieldTypeModifier)</span><br><span class="line">        context.addDeserializers(OptionalFieldDeserializers)</span><br><span class="line">        context.addBeanSerializerModifier(OptionalFieldBeanSerializerModifier)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use it like this, for example:</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">customObjectMapper</span><span class="params">()</span></span>: ObjectMapper &#123;</span><br><span class="line">    <span class="keyword">return</span> jacksonObjectMapper().apply &#123;</span><br><span class="line">        registerModule(Jdk8Module())</span><br><span class="line">        registerModule(JavaTimeModule())</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// This is our bit</span></span><br><span class="line">        registerModule(OptionalFieldModule)</span><br><span class="line"></span><br><span class="line">        disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)</span><br><span class="line"></span><br><span class="line">        disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)</span><br><span class="line">        disable(SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Level-3-Use-jackson-databind-nullable">Level 3: Use <code>jackson-databind-nullable</code></h3>
+<p>Yeah, after all that, I found that someone has done this already (of course).</p>
+<p>But it was pretty hard to find:<br>
+<a target="_blank" rel="noopener" href="https://github.com/OpenAPITools/jackson-databind-nullable">jackson-databind-nullable</a></p>
+<p>Some things I like more about my version:</p>
+<ul>
+<li>I wrote every line of it, so I know exactly what’s going on (I just<br>
+<em>like</em> this - a personal failing)</li>
+<li>I think <code>OptionalField</code> makes a lot more sense than <code>JsonNullable</code> as a<br>
+class name</li>
+<li>Mine has only the bare minimum. Take away anything and it stops working</li>
+</ul>
+<p>But <code>jackson-databind-nullable</code>:</p>
+<ul>
+<li>is used by a lot more people and is more battle-tested</li>
+<li>is more than bare minimum, which makes me worry that I’m missing something</li>
+</ul>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-PATCH-method"><span class="toc-number">1.</span> <span class="toc-text">The PATCH method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-the-black-sheep"><span class="toc-number">2.</span> <span class="toc-text">undefined: the black sheep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementing-PATCH-APIs-with-Jackson-Kotlin"><span class="toc-number">3.</span> <span class="toc-text">Implementing PATCH APIs with Jackson &#x2F; Kotlin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-1-Optional-T"><span class="toc-number">3.1.</span> <span class="toc-text">Level 1: Optional&lt;T&gt;?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-2-custom-OptionalField-T"><span class="toc-number">3.2.</span> <span class="toc-text">Level 2: custom OptionalField&lt;T?&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-3-Use-jackson-databind-nullable"><span class="toc-number">3.3.</span> <span class="toc-text">Level 3: Use jackson-databind-nullable</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&text=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&is_video=false&description=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin&body=Check out this article: https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&title=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&name=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://leohuang.dev/2025/06/08/Handling-optional-JSON-fields-for-PATCH-APIs-with-Jackson-Kotlin/&t=Handling optional JSON fields for PATCH APIs with Jackson/Kotlin"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Leo Huang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Blog</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'cbreezier/cbreezier.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'utterances';
+      var utterances_theme = 'photon-dark';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
